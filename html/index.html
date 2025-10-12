@@ -1,0 +1,4046 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            line-height: 60px;
+            z-index: 100;
+        }
+        
+        #content {
+            margin-top: 60px;
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+        
+        .scrollable-column {
+            /*flex: 1;*/
+            padding: 20px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            min-width: 100px;
+        }
+        
+        #left-column {
+            background-color: #f0f0f0;
+        }
+        
+        #right-column {
+            background-color: #e0e0e0;
+        }
+        
+        .dummy-content {
+            /*height: 1500px;*/
+            padding: 10px;
+            /* border: 1px dashed #999; */
+        }
+        
+        #resizer {
+            width: 10px;
+            background: #ccc;
+            cursor: col-resize;
+            flex-shrink: 0;
+        }
+        
+        #resizer:hover {
+            background: #aaa;
+        }
+
+        .interviewer {
+            font-size: 25px ;  /* 30px; */
+            padding: 20px;
+            margin-bottom: 5px;
+        }
+
+        .interviewer:hover{
+            cursor: pointer;
+            background-color: rgb(224, 222, 220);
+        }
+
+        img.interviewer {
+            display: inline-block;
+            vertical-align: middle;
+            width: 60px;
+            height: 60px;
+        }
+
+        .name_interviewer {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .last_mess_interviewer {
+            max-width: 98%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        div.test {
+            clear: both;
+            max-width: 80%;
+            padding: 10px;
+            border: 2px solid #F4F4F4;
+            border-radius: 45px;
+            -moz-border-radius: 15px;
+            background: #F4F4F4;
+            font-size: 30px;
+            /* min-width: ; */
+            width: max-content;
+            margin-bottom: 22px;
+        }
+
+        .native_text    {
+            color: green;
+        }
+
+        .selected_interviewer {
+            background-color: #dce5f5;
+        }
+
+        .date_message {
+            text-align: right;
+            font-size: 25px;
+        }
+
+        .my_text {
+            clear: both;
+            float: right;
+            background: #FAF6F2 !important;
+            border-color: #FAF6F2 !important;
+        }
+
+        .width_button {
+            font-size: 30px;
+            float: none;
+            width: 100%;
+        }
+
+        .botton_help {
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 5px 30px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: left;
+            height: 22px;
+        }
+
+        .botton_exit {
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+            height: 22px;            
+        }
+
+        .botton_main_config {
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: left;
+            height: 22px; 
+            /* display: none; */
+        }
+
+        .profile_user {
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 5px 30px 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+            height: 22px; 
+            display: none;            
+        }
+
+        .button_del_user {
+            background-color: #894514;
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 5px;
+            cursor: pointer;
+            padding: 7px;
+            border-radius: 5px; 
+            display: none;
+        }
+
+        .button_clear_history {
+            background-color: #4D8119;
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 5px;
+            cursor: pointer;
+            padding: 7px;
+            border-radius: 5px; 
+            display: none;            
+        }
+
+        .start_char {
+            background-color: #14895E;
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-size: 28px;
+            margin: 5px;
+            cursor: pointer;
+            padding: 7px;
+            border-radius: 5px; 
+            display: none;
+        }
+
+        .stop_char {
+            background-color: #14895E;
+            border: none;
+            color: white;
+            text-decoration: none;
+            font-size: 28px;
+            margin: 5px;
+            cursor: pointer;
+            padding: 7px;
+            border-radius: 5px; 
+            display: none;
+        }
+
+        .chat_numb {}
+
+        .date_start_chat{}
+
+        .button_chat_action {
+            font-size: 25px;
+            margin-left: 10px;
+            padding: 5px;
+        }
+
+        .add_user {
+            font-size: 25px;
+            margin-left: 10px;
+            padding: 5px;            
+        }
+
+        #head_interlocutors {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        #new_interlocutor {
+            font-size: 25px;
+            margin-left: 10px;
+            padding: 5px;
+            /* float: right; */
+            display:inline;
+        }
+
+        #lang_mess {
+            font-size: 20px;
+            max-width: 220px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+            height: 40px;
+            font-size: 25px;
+        }
+
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+            height: 200px;
+            font-size: 25px;
+        }
+
+        .button_tab {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 25px;
+        }
+        .button_tab:hover {
+            background-color: #45a049;
+        }
+
+        .select_langs {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+            height: 40px;
+            font-size: 25px;
+        }
+
+        .select_sounds {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+            height: 40px;
+            font-size: 25px;
+        }
+
+        .select_mic {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+            height: 40px;
+            font-size: 25px;
+        }
+
+        .select_browser {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+            height: 40px;
+            font-size: 25px;
+        }
+
+        .select_img {
+            /* width: 100%; */
+            box-sizing: border-box;
+            padding: 5px;
+            height: 40px;
+            font-size: 25px;            
+        }
+
+        .defcurs {
+            cursor: default !important;
+        }
+
+        .hide_any {
+            display: none !important;
+        }
+
+        #id_top_img_user {
+            width: 30px;
+            height: 30px;
+            cursor: default;
+            padding: 5px;
+            margin: 0;
+        }
+
+        #topblink1 {
+            width: 100%;
+            height: 100%;
+            margin: 0em;
+            left: 0em;
+            top: 0em;
+            position: fixed;
+            z-index: 200;
+        }
+        
+        #blink1 {
+            -webkit-animation: blink1 1s linear infinite;
+            animation: blink1 1s linear infinite;
+            top: 45%;
+            position: relative;
+            left: 42% ; /* 45%; */
+            font-size: 60px;
+            font-weight: bold;            
+        }
+
+        .long_text {
+            left: 30% !important;
+        }
+
+        @-webkit-keyframes blink1 {
+            0% { color: rgba(34, 34, 34, 1); }
+            50% { color: rgba(34, 34, 34, 0); }
+            100% { color: rgba(34, 34, 34, 1); }
+        }
+
+        @keyframes blink1 {
+            0% { color: rgba(34, 34, 34, 1); }
+            50% { color: rgba(34, 34, 34, 0); }
+            100% { color: rgba(34, 34, 34, 1); }
+        }
+
+        .sticky_div {
+            position: sticky;
+            top: -5px;
+            background: #f0f0f0;
+            margin-top: 0px;
+            /* margin-bottom: 5px; */
+            padding: 2px;            
+        }
+
+        .use_mic {
+            width: 30px;
+            height: 30px;            
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+
+        .toc {
+            background-color: #f5f9fc;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #2980b9;
+        }
+
+        #list_help_content  {
+            font-size: 30px;
+        }
+
+        .toc a {
+            color: #2980b9;
+            text-decoration: none;
+            transition: color 0.2s;
+        }       
+
+        .toc li {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size:  30px;
+        }
+
+        .sub_point {
+            margin-left: 25px !important;
+        }
+
+        .header_help {
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 30px;            
+        }
+
+        .desc_help {
+            font-size: 30px;
+        }
+
+        .img_help {
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 30px;          
+        }
+
+        .available_langs {
+            font-size: 30px;
+        }
+
+        .available_langs li {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size:  30px;
+        }
+
+        .img_brow {
+            border-color: black;
+            border-width: 1px;
+            border-style: solid;            
+        }
+
+        .author {
+            text-align: left;
+            font-style: italic;
+        }
+
+    </style>
+    <script>
+    var Manager = {
+        baseUrl:        "",
+        timeInterval:   500,    // 0.5 sec
+        countErrorLoading: 0,   // number of errors in loading
+
+        languages:      {},     // available languages
+        soundInDevice:  {},     // list of real microphones
+        soundOutDevice: {},     // list of real speakers
+        mainConfig:     {},     // main configuration
+        talkersConfig:  {},     // configuration of interlocutors
+        langLables:     {},     // language tags
+        browsers:       {},     // Acceptable browsers
+        listCommands:   [],     // list of commands
+        refreshIntervalId: 0,   // intervalID
+        timeStampStart: 0,      // start timestamp
+
+        statusChat:     false,  // chat status
+
+        // loading all languages
+        loadLanguages:     function(langs_in) {
+            if(! (typeof langs_in === 'object' && !Array.isArray(langs_in) && langs_in !== null)) {
+                console.error(`langs_in is ${typeof(langs_in)}`) ;
+                return ;
+            }
+            
+            // sorting an object by keys (language names)
+            Manager.languages = Object.keys(langs_in).sort().reduce(
+                    (obj, key) => {
+                            obj[key] = langs_in[key];
+                            return obj;
+                    },
+                    {}
+                );
+        },
+
+        // loading language tags
+        loadLangLables:     function(lang_labels) {
+            if(! (typeof lang_labels === 'object' && !Array.isArray(lang_labels) && lang_labels !== null)) {
+                console.error(`lang_labels is ${typeof(lang_labels)}`) ;
+                return ;
+            }
+
+            for(let key of Object.keys(lang_labels)) {
+                if(typeof(key) !== "string") {
+                    console.error(`key is ${typeof(key)}`) ;
+                    continue ;
+                }
+                else if(! (typeof lang_labels[key] === 'object' && !Array.isArray(lang_labels[key]) && lang_labels[key] !== null)) {
+                    console.error(`lang_labels[${key}] is ${typeof(lang_labels[key])}`) ;
+                    continue ;
+                }
+            }
+
+            Manager.langLables = lang_labels ;
+
+        },
+
+        // loading real microphones
+        loadSoundInDevice:  function(sound_in) {
+            if(! (typeof sound_in === 'object' && !Array.isArray(sound_in) && sound_in !== null)) {
+                console.error(`sound_in is ${typeof(sound_in)}`) ;
+                return ;
+            }
+
+            for (let key in sound_in) {
+                if(sound_in.hasOwnProperty(key)) {
+                    if(typeof(key) !== 'string') {
+                        console.error(`key is ${typeof(key)}`) ;
+                        continue ;
+                    }
+                    else if(! Number.isInteger(sound_in[key])) {
+                        console.error(`sound_in[${key}] is ${typeof(sound_in[key])}`) ;
+                        continue ;
+                    }
+                    else if(sound_in[key] < 0) {
+                        console.error(`Invalid value: ${sound_in[key]} of sound_in[${key}]`) ;
+                        continue ;
+                    }
+                }
+            }
+            Manager.soundInDevice = sound_in ;
+        },
+
+        // loading real speakers
+        loadSoundOutDevice:  function(sound_out) {
+            if(! (typeof sound_out === 'object' && !Array.isArray(sound_out) && sound_out !== null)) {
+                console.error(`sound_out is ${typeof(sound_out)}`) ;
+                return ;
+            }
+
+            for (let key in sound_out) {
+                if(sound_out.hasOwnProperty(key)) {
+                    if(typeof(key) !== 'string') {
+                        console.error(`key is ${typeof(key)}`) ;
+                        continue ;
+                    }
+                    else if(! Number.isInteger(sound_out[key])) {
+                        console.error(`sound_out[${key}] is ${typeof(sound_out[key])}`) ;
+                        continue ;
+                    }
+                    else if(sound_out[key] < 0) {
+                        console.error(`Invalid value: ${sound_out[key]} of sound_out[${key}]`) ;
+                        continue ;
+                    }
+                }
+            }
+            Manager.soundOutDevice = sound_out ;
+        },
+
+        // loading the main configuration
+        loadMainConfig:     function(main_conf) {
+            if(! (typeof main_conf === 'object' && !Array.isArray(main_conf) && main_conf !== null)) {
+                console.error(`main_conf is ${typeof(main_conf)}`) ;
+                return ;
+            }
+
+            Manager.mainConfig = main_conf ;
+        },
+
+        // loading configs for all interlocutors
+        loadTalkersConfig:      function(talkers_conf) {
+            if(! (typeof talkers_conf === 'object' && !Array.isArray(talkers_conf) && talkers_conf !== null)) {
+                console.error(`talkers_conf is ${typeof(talkers_conf)}`) ;
+                return ;
+            }
+
+            for (let key in talkers_conf) {
+                if(typeof(key) != "string") {
+                    console.error(`key is ${typeof(key)}`) ;
+                    return ;
+                }
+                else if(! (typeof(talkers_conf[key]) === 'object' && !Array.isArray(talkers_conf[key]) && talkers_conf[key] !== null)) {
+                    console.error(`talkers_conf[${key}] is ${typeof(talkers_conf[key])}`) ;
+                    return ;
+                }
+            }            
+
+            Manager.talkersConfig = talkers_conf ;
+
+            Manager.ListUsers.addAllUsers() ;
+        },
+
+        // loading multiple chats
+        loadChats:  function(chats_in) {
+            if(! (typeof chats_in === 'object' && !Array.isArray(chats_in) && chats_in !== null)) {
+                console.error(`chats_in is ${typeof(chats_in)}`) ;
+                return ;
+            }
+
+            // user_id check
+            let key_user_id = "user_id" ;
+            if(! (key_user_id in chats_in)) {
+                console.error(`Not found key: chats_in[${key_user_id}]`) ;
+                return ;
+            } else if(! Number.isInteger(chats_in[key_user_id])) {
+                console.error(`chats_in[${key_user_id}] is ${typeof(chats_in[key_user_id])}`) ;
+                return ;
+            } else if(chats_in[key_user_id] < 1) {
+                console.error(`Invalid value: ${chats_in[key_user_id]} of chats_in[${key_user_id}]`) ;
+                return ;
+            }
+
+            let user_name = '' ;
+            for(let key_tmp in Manager.talkersConfig) { 
+                if(Manager.talkersConfig[key_tmp].id == chats_in[key_user_id]) {
+                    user_name = key_tmp ;
+                    break ;
+                }
+            }
+
+            if(! user_name) {
+                console.error("Undefined user_name") ;
+                return ;
+            }
+
+            // checking chats
+            let key_chats = 'chats' ;
+            if(! (key_chats in chats_in)) {
+                console.error(`Not found key: chats_in[${key_chats}]`) ;
+                return ;
+            } else if(! (typeof chats_in[key_chats] === 'object' && !Array.isArray(chats_in[key_chats]) && chats_in[key_chats] !== null)) {
+                console.error(`chats_in[${key_chats}] is ${typeof(chats_in[key_chats])}`) ;
+                return ;
+            }
+            
+            let list_add_chats = [] ;
+            for(let chat_id_tmp in chats_in[key_chats]) {
+                if(chat_id_tmp in Manager.talkersConfig[user_name][key_chats]) {
+                    if(Manager.talkersConfig[user_name][key_chats][chat_id_tmp] === 0) {
+                        Manager.talkersConfig[user_name][key_chats][chat_id_tmp] = chats_in[key_chats][chat_id_tmp] ;
+                        list_add_chats.push(chat_id_tmp) ;
+                    }
+                }
+            }
+
+            if(list_add_chats.length
+               && Manager.TopMenu.ObjUser
+               && Manager.TopMenu.ObjUser.getAttribute('user_id')
+               && parseInt(Manager.TopMenu.ObjUser.getAttribute('user_id'), 10) == chats_in[key_user_id]
+            ) {
+                list_add_chats = list_add_chats
+                                    .map(function (x) {
+                                            return parseInt(x, 10);
+                                    })
+                                    .sort() ;
+                Manager.UserMessages.loadBaseData(chats_in[key_user_id], 
+                                         	      list_add_chats
+                                        	     );
+            }
+        },
+
+        // script completion
+        parseExit:        function(command_data) {
+            if(! (typeof command_data === 'object' && !Array.isArray(command_data) && command_data !== null)) {
+                console.error(`command_data is ${typeof(command_data)}`) ;
+                return ;
+            }
+
+            // user_id check
+            let key_time = "time" ;
+            if(! (key_time in command_data)) {
+                console.error(`Not found key: command_data[${key_time}]`) ;
+                return ;
+            } else if(! Number.isInteger(command_data[key_time])) {
+                console.error(`command_data[${key_time}] is ${typeof(command_data[key_time])}`) ;
+                return ;
+            } else if(command_data[key_time] < 1) {
+                console.error(`Invalid value: ${command_data[key_time]} of chats_in[${key_user_id}]`) ;
+                return ;
+            }
+
+            window.location.reload() ;  // reload page
+        },
+
+        // data on the stopped chat
+        loadStopedChat:     function(command_data) {
+
+            if(! (typeof command_data === 'object' && !Array.isArray(command_data) && command_data !== null)) {
+                console.error(`command_data is ${typeof(command_data)}`) ;
+                return ;
+            }
+
+            if(command_data.main) {
+                Manager.WaitingScreen.hide() ;
+            }
+
+            // user_id check
+            let key_user_id = "user_id" ;
+            if(! (key_user_id in command_data)) {
+                console.error(`Not found key: command_data[${key_user_id}]`) ;
+                return ;
+            } else if(! Number.isInteger(command_data[key_user_id])) {
+                console.error(`command_data[${key_user_id}] is ${typeof(command_data[key_user_id])}`) ;
+                return ;
+            }
+
+            // num_chat verification
+            let key_num_chat = "num_chat" ;
+            if(! (key_num_chat in command_data)) {
+                console.error(`Not found key: command_data[${key_num_chat}]`) ;
+                return ;
+            } else if(! Number.isInteger(command_data[key_num_chat])) {
+                console.error(`command_data[${key_num_chat}] is ${typeof(command_data[key_num_chat])}`) ;
+                return ;
+            } else if(command_data[key_num_chat] < 0) {
+                console.error(`Invalid value: ${command_data[key_num_chat]} of command_data[${key_num_chat}]`) ;
+                return ;
+            }
+
+            // time check
+            let key_time = "time" ;
+            if(! (key_time in command_data)) {
+                console.error(`Not found key: command_data[${key_time}]`) ;
+                return ;
+            } else if(! Number.isInteger(command_data[key_time])) {
+                console.error(`command_data[${key_time}] is ${typeof(command_data[key_time])}`) ;
+                return ;
+            } else if(command_data[key_time] < 0) {
+                console.error(`Invalid value: ${command_data[key_time]} of command_data[${key_time}]`) ;
+                return ;
+            }
+
+            if(! Manager.UserMessages.Obj) {
+                console.error("Undefined UserMessages.Obj") ;
+                return ;
+            } else if(! Manager.TopMenu.ObjUser) {
+                console.error("Undefined TopMenu.ObjUser") ;
+                return ;
+            }
+
+            if(! Manager.TopMenu.ObjStartChat) {
+                console.error("Undefined ObjStartChat") ;
+                return ;
+            } else if(! Manager.TopMenu.ObjStopChat) {
+                console.error("Undefined ObjStopChat") ;
+                return ;
+            }
+
+
+            let user_id = parseInt(Manager.TopMenu.ObjUser.getAttribute("user_id"), 10) ;
+            if(user_id < 1) {
+                return ;
+            }
+
+            if(user_id != command_data[key_user_id]) {
+                return ;
+            }
+
+            let list_bottons = Manager.UserMessages.Obj.querySelectorAll(".button_chat_action") ;
+
+            let attr_act = "act" ;
+            let attr_num_chat = "num_chat" ;
+            let num_chat_val = 0, 
+                num_chat_last = 0 ;
+
+            for(let i = 0 ; i < list_bottons.length ; i++) {
+                num_chat_val = parseInt(list_bottons[i].getAttribute(attr_num_chat), 10) ;
+                if(list_bottons[i].getAttribute(attr_act) != "d"
+                   && num_chat_val == command_data[key_num_chat]) {
+                    list_bottons[i].setAttribute(attr_act, "d") ;
+                    list_bottons[i].replaceChildren() ;
+                    list_bottons[i].appendChild(document.createTextNode(Manager.langLables["deletechat"][Manager.mainConfig.lang])) ;
+                    num_chat_last = num_chat_val ;
+                }
+            }
+
+            if(num_chat_last) {
+                let button_act = Manager.UserMessages.Obj.querySelector(".width_button") ;
+                if(button_act) {
+                    button_act.replaceChildren() ;
+                    button_act.setAttribute("act", "s") ;   // (s)tart chat
+                    button_act.appendChild(document.createTextNode(Manager.langLables["startchat"][Manager.mainConfig.lang])) ;
+                    Manager.TopMenu.ObjStartChat.style.display = 'inline' ;
+                    Manager.TopMenu.ObjStopChat.style.display = 'none' ;
+                }
+            }
+
+        },
+
+        // data on the interlocutor's configuration has been saved
+        loadSavedUserConfig:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            if(! (typeof command_data === 'object' && !Array.isArray(command_data) && command_data !== null)) {
+                console.error(`command_data is ${typeof(command_data)}`) ;
+                return ;
+            }
+            
+            let old_user_name ;
+
+            for(let user_name_ in Manager.talkersConfig) { 
+                if(Manager.talkersConfig[user_name_].id == command_data.id) {
+                    old_user_name = user_name_ ;
+                    break ;
+                }
+            }
+
+            if(command_data["name"] in Manager.talkersConfig) {
+                if(command_data.id != Manager.talkersConfig[command_data["name"]].id) {
+                    alert(Manager.langLables["duplicatenickname"][Manager.mainConfig.lang]) ;
+                    return ;
+                }
+            }
+
+            if(old_user_name) { // user data found
+                Manager.talkersConfig[old_user_name]["id"] = command_data["id"] ;
+                Manager.talkersConfig[old_user_name]["img"] = command_data["img"] ;
+                Manager.talkersConfig[old_user_name]["lang"] = command_data["lang"] ;
+                Manager.talkersConfig[old_user_name]["name"] = command_data["name"] ;
+                Manager.talkersConfig[old_user_name]["about"] = command_data["about"] ;
+                Manager.talkersConfig[old_user_name]["usemic"] = command_data["usemic"] ;
+
+                // the name of the interlocutor has changed
+                if(old_user_name !== command_data["name"]) {
+                    Object.defineProperty(
+                        Manager.talkersConfig, 
+                        command_data["name"],
+                        Object.getOwnPropertyDescriptor(
+                            Manager.talkersConfig,
+                            old_user_name
+                        )
+                    ) ;
+                    delete Manager.talkersConfig[old_user_name];
+                }
+
+            } else {    // no user data
+                Manager.talkersConfig[command_data["name"]] = {
+                    id:     command_data["id"],
+                    img:    command_data["img"],
+                    lang:   command_data["lang"],
+                    name:   command_data["name"],
+                    about:  command_data["about"],
+                    usemic: command_data["usemic"],
+                    chats: {},
+                }
+            }
+
+            // modifying the appearance of the interlocutor's profile
+            Manager.ListUsers.updateUser(command_data["id"]) ;
+            Manager.ProfileInterlocutor.showProfile(command_data["id"]);
+        },
+
+        // Processing a duplicate nickname
+        loadDupNickname:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["dupnickname"][Manager.mainConfig.lang]) ;
+
+        },
+        
+        // handling of invalid language
+        loadInvalidLang:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["invalidlang"][Manager.mainConfig.lang]) ;
+
+        },
+
+        // processing an invalid image
+        loadInvalidImg:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["invalidimage"][Manager.mainConfig.lang]) ;
+
+        },
+
+        // handling invalid browser
+        loadInvalidBrowser:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["invalidwebbrowser"][Manager.mainConfig.lang]) ;
+
+        },
+
+        // Invalid microphone handling
+        loadInvalidMic:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["unacceptablemic"][Manager.mainConfig.lang]) ;
+
+        },
+
+        // invalid speaker handling
+        loadInvalidSound:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["unacceptablesound"][Manager.mainConfig.lang]) ;
+
+        },
+
+        // processing of invalid interlocutor
+        loadInvalidUser:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["unacceptableinterlocutor"][Manager.mainConfig.lang]) ;
+
+        },
+
+        // processing start chat
+        loadStartingChat:     function(command_data) {
+        },
+
+        // Loading chat header
+        loadFirstPartChatNow:   function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            let user_name = null ;
+
+            for(let user_name_ in Manager.talkersConfig) {
+                if(Manager.talkersConfig[user_name_].id == command_data.user_id) {
+                    user_name = user_name_ ;
+                    break ;
+                }
+            }
+
+            if(! user_name) {
+                console.error(`Invalid user_id: ${command_data.user_id}`) ;
+                return ;
+            }
+
+            let id_chat = command_data.num ;
+            let i = 0 ;
+
+            // Add data to the chats of the interlocutor's configuration
+            Manager.talkersConfig[user_name].chats[id_chat] = [command_data] ;
+
+            if(! Manager.TopMenu.ObjUser) {
+                console.error("Undefined TopMenu.ObjUser") ;
+                return ;
+            }
+
+            let val_user_id = parseInt(Manager.TopMenu.ObjUser.getAttribute("user_id"), 10) ;
+
+            // users are different
+            if(command_data.user_id != val_user_id) {
+                return ;
+            }
+
+            let date_string = new Date(Manager.talkersConfig[user_name].chats[id_chat][i][command_data.type == 'F' ? "start": "time"] * 1000)
+                                                    .toLocaleDateString(
+                                                        Manager.mainConfig.lang, // "en", 
+                                                        Manager.ListUsers.optionsShortDate
+                                                    )
+                                ;
+
+            let mess_unit = `
+                <h2 style="clear: both" num_chat="${Manager.talkersConfig[user_name].chats[id_chat][i].num}"><span class="chat_numb">${Manager.encodeWithTextNode(Manager.langLables["chatn"][Manager.mainConfig.lang])}</span> ${Manager.talkersConfig[user_name].chats[id_chat][i].num} (${Manager.talkersConfig[user_name].chats[id_chat][0].langs}), <span class="date_start_chat">${date_string}</span>
+                    <button class="button_chat_action" num_chat="${Manager.talkersConfig[user_name].chats[id_chat][i].num}" act="e" onclick="Manager.TopMenu.mixActionChat(event);">${Manager.encodeWithTextNode(Manager.langLables["stopchat"][Manager.mainConfig.lang])}</button>
+                </h2>` ;
+
+            if(! Manager.UserMessages.Obj) {
+                console.error("Undefined UserMessages.Obj") ;
+                return ;
+            }
+
+            if(! Manager.TopMenu.ObjStopChat) {
+                console.error("Undefined TopMenu.ObjStopChat") ;
+                return ;
+            }
+
+            if(! Manager.TopMenu.ObjStartChat) {
+                console.error("Undefined TopMenu.ObjStartChat") ;
+                return ;
+            }
+
+            let node_button = Manager.UserMessages.Obj.querySelector(".width_button") ;
+            if(! node_button) {
+                console.error("Undefined node_button") ;
+                return ;
+            }
+
+            node_button.insertAdjacentHTML('beforebegin', mess_unit) ;
+
+            node_button.setAttribute("act", "e") ;
+            node_button.replaceChildren() ;
+            node_button.appendChild(window.document.createTextNode(Manager.encodeWithTextNode(Manager.langLables["stopchat"][Manager.mainConfig.lang]))) ;
+
+            Manager.TopMenu.ObjStartChat.style.display = "none" ;
+            Manager.TopMenu.ObjStopChat.style.display = "inline" ;
+
+            Manager.LeftRight.RightColumnNode.scrollTop = Manager.LeftRight.RightColumnNode.scrollHeight;
+        },
+
+        // new chat messages received
+        loadNextPartChatNow:    function(command_data) {
+
+            let user_name = null ;
+
+            for(let user_name_ in Manager.talkersConfig) {
+                if(Manager.talkersConfig[user_name_].id == command_data.user_id) {
+                    user_name = user_name_ ;
+                    break ;
+                }
+            }
+
+            if(! user_name) {
+                console.error(`Invalid user_id: ${command_data.user_id}`) ;
+                return ;
+            }
+
+            let id_chat = command_data.num ;
+
+            // Add data to the chats of the interlocutor's configuration
+            Manager.talkersConfig[user_name].chats[id_chat].push(command_data) ;
+            // get the index of a new message
+            let i = Manager.talkersConfig[user_name].chats[id_chat].length - 1 ;
+
+            let type_mess = command_data.type ;
+
+            if(type_mess != 'N') {
+                console.log(`Invalid type_mess: ${type_mess}`) ;
+                return ;
+            }
+
+            let side_mess = Manager.talkersConfig[user_name].chats[id_chat][i].side,
+                source_mess = Manager.talkersConfig[user_name].chats[id_chat][i].source,
+                translated_message = Manager.talkersConfig[user_name].chats[id_chat][i].translated
+                ;
+
+            let date_string = new Date(Manager.talkersConfig[user_name].chats[id_chat][i][type_mess == 'F' ? "start": "time"] * 1000)
+                                                    .toLocaleDateString(
+                                                        Manager.mainConfig.lang, // "en", 
+                                                        Manager.ListUsers.optionsShortDate
+                                                    )
+                                ;
+
+            if(side_mess == 'in') { // incoming message
+                let outer_style_css = '',
+                    inner_style_css = '' ;
+                                    
+                switch(Manager.TopMenu.ObjLangMess.value) {
+                    case 'a':
+                        break ;
+                    case 'm':
+                        outer_style_css = 'display: none;' ;
+                        break ;
+                    case 'o':
+                        inner_style_css = 'display: none;' ;
+                        break ;
+                }
+
+                mess_unit = `
+                <div class="test" num_chat="${Manager.talkersConfig[user_name].chats[id_chat][i].num}">
+                    <div class="other_text" style="${outer_style_css}">
+                        ${Manager.encodeWithTextNode(source_mess)}
+                    </div>
+                    <div class="native_text" style="${inner_style_css}">
+                        ${Manager.encodeWithTextNode(translated_message)}
+                    </div>
+                    <div class="date_message">${Manager.encodeWithTextNode(date_string)}</div>
+                </div>` ;
+            } else if(side_mess == 'out') {    // outgoing message
+                let outer_style_css = '',
+                    inner_style_css = '' ;
+
+                switch(Manager.TopMenu.ObjLangMess.value) {
+                    case 'a':
+                        break ;
+                    case 'm':
+                        outer_style_css = 'display: none;' ;
+                        break ;
+                    case 'o':
+                        inner_style_css = 'display: none;' ;
+                        break ;
+                }
+
+                mess_unit = `
+                <div class="test my_text" num_chat="${Manager.talkersConfig[user_name].chats[id_chat][i].num}">
+                    <div class="native_text" style="${inner_style_css}">
+                        ${Manager.encodeWithTextNode(source_mess)}
+                    </div>
+                    <div class="other_text" style="${outer_style_css}">
+                        ${Manager.encodeWithTextNode(translated_message)}
+                    </div>
+                    <div class="date_message">${Manager.encodeWithTextNode(date_string)}</div>
+                </div>` ;
+            } else {
+                console.error(`Invalid sode of mesage: ${side_mess}`) ;
+                return ;
+            }
+
+            if(! Manager.UserMessages.Obj) {
+                console.error("Undefined UserMessages.Obj") ;
+                return ;
+            }
+
+            if(! Manager.TopMenu.ObjStopChat) {
+                console.error("Undefined TopMenu.ObjStopChat") ;
+                return ;
+            }
+
+            if(! Manager.TopMenu.ObjStartChat) {
+                console.error("Undefined TopMenu.ObjStartChat") ;
+                return ;
+            }
+
+            let node_button = Manager.UserMessages.Obj.querySelector(".width_button") ;
+            if(! node_button) {
+                console.error("Undefined node_button") ;
+                return ;
+            }
+
+            node_button.insertAdjacentHTML('beforebegin', mess_unit) ;
+
+            node_button.setAttribute("act", "e") ;
+            node_button.replaceChildren() ;
+            node_button.appendChild(window.document.createTextNode(Manager.encodeWithTextNode(Manager.langLables["stopchat"][Manager.mainConfig.lang]))) ;
+
+            Manager.TopMenu.ObjStartChat.style.display = "none" ;
+            Manager.TopMenu.ObjStopChat.style.display = "inline" ;
+
+            Manager.LeftRight.RightColumnNode.scrollTop = Manager.LeftRight.RightColumnNode.scrollHeight;
+
+            // set the last message to the left column
+            let node_left = window.document.getElementById(`user_${command_data.user_id}`) ;
+
+            if(! node_left) {
+                console.error("Undefined node_left") ;
+                return ;
+            }
+
+            let node_left_date = node_left.querySelector(".native_date") ;
+            if(! node_left_date) {
+                console.error("Undefined node_left_date") ;
+                return ;
+            }
+
+            node_left_date.replaceChildren() ;
+            node_left_date.appendChild(window.document.createTextNode(date_string)) ;
+            node_left_date.setAttribute("ts", command_data.time) ;
+
+            let node_left_mess = node_left.querySelector(".native_text") ;
+            if(! node_left_mess) {
+                console.error("Undefined node_left_mess") ;
+                return ;
+            }
+
+            node_left_mess.replaceChildren() ;
+            node_left_mess.appendChild(window.document.createTextNode(translated_message)) ;
+
+        },
+
+        // Processing a successful chat deletion
+        loadChatDeleted:       function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            if(! Manager.TopMenu.ObjUser) {
+                console.error("Undefined TopMenu.ObjUser") ;
+                return ;
+            } else if(! Manager.UserMessages.Obj) {
+                console.error("Undefined UserMessages.Obj") ;
+                return ;
+            }
+
+            if(parseInt(Manager.TopMenu.ObjUser.getAttribute("user_id"), 10) != command_data.user_id) {
+                console.error(`Invalid user_id: ${command_data.user_id}`) ;
+                return ;                
+            }
+
+            let ListNods = Manager.UserMessages.Obj.childNodes ;
+
+            for(const node_tmp of ListNods) {
+                if(node_tmp.tagName && node_tmp.getAttribute("num_chat")) {
+                    if(parseInt(node_tmp.getAttribute("num_chat"), 10) == command_data.num_chat) {
+                        node_tmp.parentNode.removeChild(node_tmp) ;
+                    }
+                }
+            }
+
+            let user_name ;
+
+            for(let user_name_ in Manager.talkersConfig) { 
+                if(Manager.talkersConfig[user_name_].id == command_data.user_id) {
+                    user_name = user_name_ ;
+                    break ;
+                }
+            }
+
+            if(user_name === undefined) {
+                console.error(`Invalid id_user: ${command_data["user_id"]}`) ;
+                return ;
+            }
+
+            // deleting chat data
+            if(Manager.talkersConfig[user_name].chats[command_data.num_chat]) {
+                delete Manager.talkersConfig[user_name].chats[command_data.num_chat] ;
+            }
+
+            let list_chats = Object
+                            .keys(Manager.talkersConfig[user_name].chats)
+                            .map(function (x) {
+                                    return parseInt(x, 10);
+                                })
+                            .sort((a, b) => b - a)
+                            ;
+            let last_ts = 0,
+                last_mess = '' ;
+
+            for(let i = 0; i < list_chats.length; i++) {
+                for(let j = Manager.talkersConfig[user_name].chats[list_chats[i]].length - 1 ; j >= 0 ; j--) {
+                    if(Manager.talkersConfig[user_name].chats[list_chats[i]][j].type == 'N') {
+                       last_ts = Manager.talkersConfig[user_name].chats[list_chats[i]][j].time ;
+                       last_mess = Manager.talkersConfig[user_name].chats[list_chats[i]][j].side == 'in' ? Manager.talkersConfig[user_name].chats[list_chats[i]][j].translated : Manager.talkersConfig[user_name].chats[list_chats[i]][j].source ;
+                       break ;
+                    }
+                }
+                if(last_ts) {
+                    break ;
+                }
+            }
+
+            // set the last message to the left column
+            let node_left = window.document.getElementById(`user_${command_data["user_id"]}`) ;
+
+            if(! node_left) {
+                console.error("Undefined node_left") ;
+                return ;
+            }
+
+            let node_left_date = node_left.querySelector(".native_date") ;
+            if(! node_left_date) {
+                console.error("Undefined node_left_date") ;
+                return ;
+            }
+            node_left_date.replaceChildren() ;
+            node_left_date.setAttribute("ts", last_ts) ;
+            if(last_ts) {
+                let date_string = new Date(last_ts * 1000)
+                                        .toLocaleDateString(
+                                            Manager.mainConfig.lang,
+                                            Manager.ListUsers.optionsShortDate
+                                        )
+                                ;
+                node_left_date.appendChild(window.document.createTextNode(date_string)) ;
+            }
+
+            let node_left_mess = node_left.querySelector(".native_text") ;
+            if(! node_left_mess) {
+                console.error("Undefined node_left_mess") ;
+                return ;
+            }
+            node_left_mess.replaceChildren() ;
+            if(last_mess.length) {
+                node_left_mess.appendChild(window.document.createTextNode(last_mess)) ;
+            }
+        },
+
+        // chat deletion error
+        loadErrDelChat:     function(command_data) {
+            
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["chatdelerr"][Manager.mainConfig.lang]) ;
+        },
+
+        // Invalid chat N
+        loadInvalidChatNumber:     function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            alert(Manager.langLables["invalidchatnumber"][Manager.mainConfig.lang]) ;            
+        },
+
+        // processing cleared history
+        loadHistoryCleared:     function(command_data) {
+            
+            Manager.WaitingScreen.hide() ;
+
+            if(! (typeof command_data === 'object' && !Array.isArray(command_data) && command_data !== null)) {
+                console.error(`command_data is ${typeof(command_data)}`) ;
+                return ;
+            }
+
+            if(! Number.isInteger(command_data["id"])) {
+                console.error(`id_user isn't int, it's: ${typeof(command_data["id"])}`) ;
+                return ;
+            } else if(command_data["id"] <= 0) {
+                console.error(`Invalid value: ${command_data["id"]} of id_user`) ;
+                return ;
+            }
+            
+            let user_name ;
+
+            for(let user_name_ in Manager.talkersConfig) { 
+                if(Manager.talkersConfig[user_name_].id == command_data.id) {
+                    user_name = user_name_ ;
+                    break ;
+                }
+            }
+
+            if(user_name === undefined) {
+                console.error(`Invalid id_user: ${command_data["id"]}`) ;
+                return ;
+            }
+
+            Manager.talkersConfig[user_name].chats = {} ;
+
+            let root_node = window.document.getElementById(`user_${command_data["id"]}`) ;
+            if(! root_node) {
+                console.error(`Undefined root_node for id_user: ${command_data["id"]}`) ;
+                return ;
+            }
+
+            let date_last_mess_node = root_node.querySelector(".native_date"),
+                text_last_mess_node = root_node.querySelector(".native_text") ;
+
+            if(! date_last_mess_node) {
+                console.error(`Undefined date_last_mess_node for id_user: ${command_data["id"]}`) ;
+                return ;
+            } else if(! text_last_mess_node) {
+                console.error(`Undefined text_last_mess_node for id_user: ${command_data["id"]}`) ;
+                return ;
+            }
+
+            date_last_mess_node.replaceChildren() ;
+            text_last_mess_node.replaceChildren() ;
+            
+            Manager.UserMessages.loadBaseData(command_data["id"]);
+        },
+
+        // deleting a user
+        loadUserDeleted:     function(command_data) {
+            
+            Manager.WaitingScreen.hide() ;
+
+            if(! (typeof command_data === 'object' && !Array.isArray(command_data) && command_data !== null)) {
+                console.error(`command_data is ${typeof(command_data)}`) ;
+                return ;
+            }
+
+            if(! Number.isInteger(command_data["id"])) {
+                console.error(`id_user isn't int, it's: ${typeof(command_data["id"])}`) ;
+                return ;
+            } else if(command_data["id"] <= 0) {
+                console.error(`Invalid value: ${command_data["id"]} of id_user`) ;
+                return ;
+            }
+            
+            let user_name ;
+
+            for(let user_name_ in Manager.talkersConfig) { 
+                if(Manager.talkersConfig[user_name_].id == command_data.id) {
+                    user_name = user_name_ ;
+                    break ;
+                }
+            }
+
+            if(user_name === undefined) {
+                console.error(`Invalid id_user: ${command_data["id"]}`) ;
+                return ;
+            }
+            
+            delete Manager.talkersConfig[user_name] ;
+
+            let root_node = window.document.getElementById(`user_${command_data["id"]}`) ;
+            if(! root_node) {
+                console.error(`Undefined root_node for id_user: ${command_data["id"]}`) ;
+                return ;
+            }
+            
+            root_node.parentNode.removeChild(root_node) ;
+
+            Manager.TopMenu.showMenuUnits(0) ;
+
+            Manager.UserMessages.clear() ;
+        },
+
+        // The main configuration has been saved.
+        loadMainconfigSaved:       function(command_data) {
+
+            Manager.WaitingScreen.hide() ;
+
+            if(!Array.isArray(command_data) ) {
+                console.error(`command_data is ${typeof(command_data)}`) ;
+                return ;
+            }
+
+            Manager.mainConfig["lang"] = command_data[0]["lang"]
+            Manager.mainConfig["real_input_name"] = command_data[0]["real_input_name"]
+            Manager.mainConfig["real_input_idx"] = command_data[0]["real_input_idx"]
+            Manager.mainConfig["real_output_name"] = command_data[0]["real_output_name"]
+            Manager.mainConfig["real_output_idx"] = command_data[0]["real_output_idx"]
+
+            Manager.browsers = command_data[1] ;
+
+            Manager.SwitchLang.doSwitch() ; // switch to the main config language
+
+            Manager.ManagerMainConfig.showConfig() ;
+        },
+
+        // loading browsers
+        loadBrowsers:       function(browsers_data) {
+            if(! (typeof browsers_data === 'object' && !Array.isArray(browsers_data) && browsers_data !== null)) {
+                console.error(`browsers_data is ${typeof(browsers_data)}`) ;
+                return ;
+            }
+
+            Manager.browsers = browsers_data ;
+
+        },
+
+        loadData:   function() {
+            
+            if(Manager.baseUrl == ""){
+                return ;
+            }
+        
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if(xmlHttp.readyState == 4) {    // the request has been processed and the response is ready
+                    if(xmlHttp.status == 200) {  // the request was successful
+                        Manager.countErrorLoading = 0 ;
+                        for(let i = 0 ; i < xmlHttp.response.length ; i++) {
+                            let keys = Object.keys(xmlHttp.response[i]) ;
+                            if(keys.length != 1) {
+                                console.error(`Invalid size: ${keys.length} of keys`) ;
+                                continue ;
+                            }
+
+                            switch(keys[0]) {
+                                case "leftright":           // loading left-right div
+                                    Manager.LeftRight.loadLeftRight(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break;                                
+                                case "langs":           // loading available languages
+                                    Manager.loadLanguages(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break;
+                                case "lables":           // loading language tags
+                                    Manager.loadLangLables(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break;                                    
+                                case "sound_in_load":   // microphone data
+                                    Manager.loadSoundInDevice(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break;
+                                case "sound_out_load":   // data on speakers
+                                    Manager.loadSoundOutDevice(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break;
+                                case "main_conf_load":  // main configuration
+                                    Manager.loadMainConfig(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break;
+                                case "talk_cong_load":  // loading data on interlocutors
+                                    Manager.loadTalkersConfig(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break;
+                                case "chats":  // loading multiple chats
+                                    Manager.loadChats(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "ended":   // stop script
+                                    Manager.parseExit(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break;
+                                case "stopedchat":  // data on the stopped chat
+                                    Manager.loadStopedChat(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "saveduserconfig": // The interlocutor's config has been saved
+                                    Manager.loadSavedUserConfig(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "dupnickname": // duplicate of the interlocutor's nickname
+                                    Manager.loadDupNickname(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "invalidlang": // Inappropriate language
+                                    Manager.loadInvalidLang(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "invalidimg": // Invalid image
+                                    Manager.loadInvalidImg(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "historycleared": // clear user history
+                                    Manager.loadHistoryCleared(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "userdeleted": // deleting a user
+                                    Manager.loadUserDeleted(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "mainconfigsaved": // deleting an interlocutor
+                                    Manager.loadMainconfigSaved(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "browsers": // Loading browsers
+                                    Manager.loadBrowsers(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "invalidbrowser": // invalid browser
+                                    Manager.loadInvalidBrowser(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "invalidmic": // Invalid microphone
+                                    Manager.loadInvalidMic(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "invalidsound": // invalid speaker
+                                    Manager.loadInvalidSound(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "invaliduser": // unacceptable interlocutor
+                                    Manager.loadInvalidUser(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "startingchat": // starting a chat
+                                    Manager.loadStartingChat(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "firstpartchatnow": // new chat title received
+                                    Manager.loadFirstPartChatNow(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "nextpartchatnow": // new chat messages received
+                                    Manager.loadNextPartChatNow(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "chatdeleted": // received a message about chat deletion
+                                    Manager.loadChatDeleted(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "errdelchat": // chat deletion error
+                                    Manager.loadErrDelChat(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "invalidchatnumber": // Invalid chat N
+                                    Manager.loadInvalidChatNumber(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;
+                                case "helpdata": // loading help
+                                    Manager.Help.loadHelpData(eval('('+ xmlHttp.response[i][keys[0]] +')'));
+                                    break ;                                    
+                                default:
+                                    console.error(`Invalid key: ${keys[0]}`) ;
+                            }
+                        }
+                    } else if(xmlHttp.status == 0) { // connection failed
+                        if(++Manager.countErrorLoading >= 20) {
+                            if(Manager.refreshIntervalId != 0) {
+                                clearInterval(Manager.refreshIntervalId) ;
+                                Manager.refreshIntervalId = 0;
+                                window.document.write("<h1>Closed</h1>") ;
+                            }
+                        }
+                    }
+                }
+            }
+
+            let list_com = [],
+                uniq_hashes = {} ;
+
+            while(Manager.listCommands.length) {
+                let unit_data = Manager.listCommands.pop() ;
+                let key_unit = JSON.stringify(unit_data) ;
+                if(!(key_unit in uniq_hashes)) {
+                    list_com.unshift(unit_data) ;
+                    uniq_hashes[key_unit] = "" ;
+                }
+            }
+
+            if(list_com) {
+                xmlHttp.open("GET", Manager.baseUrl + `?q=${encodeURIComponent(JSON.stringify(list_com))}`, true); // true for asynchronous
+                xmlHttp.responseType = 'json';             
+                xmlHttp.send(null);
+            }
+        },
+
+        // text string encoding
+        encodeWithTextNode:     function(htmlstring) {  
+            let textarea = document.createElement('textarea');  
+            let text = document.createTextNode(htmlstring);  
+            textarea.appendChild(text);  
+            return textarea.innerHTML;  
+        },
+
+        addShalses:     function(text_in) {
+            return text_in.replace(/'/g, "\\'").replace(/"/g, '\\"') ;
+        },
+
+        // get a string with all languages
+        getLangsString:     function(short_lang_def = 'en') {
+
+            let lang_out = '' ;
+            
+            for (let long_lang in Manager.languages) {
+                let text_selected = Manager.languages[long_lang] == short_lang_def ? "selected" : "" ;
+                lang_out += `<option value="${Manager.addShalses(Manager.languages[long_lang])}" ${text_selected}>${Manager.encodeWithTextNode(long_lang)}</option>` ;
+            }
+
+            return lang_out ;
+        },
+
+        // Get a string of sound blaster devices
+        getSoundString:     function() {
+
+            if(Manager.mainConfig.real_output_name in Manager.soundOutDevice) {
+                if(Manager.mainConfig.real_output_idx != Manager.soundOutDevice[Manager.mainConfig.real_output_name]) {
+                    Manager.mainConfig.real_output_name = '' ;
+                    Manager.mainConfig.real_output_idx = -1 ;
+                }
+            } else {
+                Manager.mainConfig.real_output_name = '' ;
+                Manager.mainConfig.real_output_idx = -1 ;
+            }
+
+            if(Manager.mainConfig.real_output_idx) {
+                for(let key_ in Manager.soundOutDevice) { 
+                    if(Manager.soundOutDevice[key_] == Manager.mainConfig.real_output_idx) {
+                        if(key_ !== Manager.mainConfig.real_output_name) {
+                            Manager.mainConfig.real_output_name = '' ;
+                            Manager.mainConfig.real_output_idx = -1 ;
+                        }
+                        break ;
+                    }
+                }
+            }
+
+            let sound_out = Manager.mainConfig.real_output_idx != -1 ? '' : '<option value="-1" selected></option>' ;
+
+            for (let sound_ in Manager.soundOutDevice) {
+                let text_selected = Manager.soundOutDevice[sound_] == Manager.mainConfig.real_output_idx ? "selected" : "" ;
+                sound_out += `<option value="${Manager.soundOutDevice[sound_]}" ${text_selected}>${Manager.encodeWithTextNode(sound_)}</option>` ;
+            }
+
+            return sound_out ;            
+        },
+
+        // get a string of microphone devices
+        getMicrophoneString:     function() {
+
+            if(Manager.mainConfig.real_input_name in Manager.soundInDevice) {
+                if(Manager.mainConfig.real_input_idx != Manager.soundInDevice[Manager.mainConfig.real_input_name]) {
+                    Manager.mainConfig.real_input_name = '' ;
+                    Manager.mainConfig.real_input_idx = -1 ;
+                }
+            } else {
+                Manager.mainConfig.real_input_name = '' ;
+                Manager.mainConfig.real_input_idx = -1 ;
+            }
+
+            if(Manager.mainConfig.real_input_idx) {
+                for(let key_ in Manager.soundInDevice) { 
+                    if(Manager.soundInDevice[key_] == Manager.mainConfig.real_input_idx) {
+                        if(key_ !== Manager.mainConfig.real_input_name) {
+                            Manager.mainConfig.real_input_name = '' ;
+                            Manager.mainConfig.real_input_idx = -1 ;
+                        }
+                        break ;
+                    }
+                }
+            }
+
+            let sound_out = Manager.mainConfig.real_input_idx != -1 ? '' : '<option value="-1" selected></option>' ;
+
+            for (let sound_ in Manager.soundInDevice) {
+                let text_selected = Manager.soundInDevice[sound_] == Manager.mainConfig.real_input_idx ? "selected" : "" ;
+                sound_out += `<option value="${Manager.soundInDevice[sound_]}" ${text_selected}>${Manager.encodeWithTextNode(sound_)}</option>` ;
+            }
+
+            return sound_out ;            
+        },
+
+        // get WebBrowser string
+        getBrowsersString:      function() {
+
+            let browser_out = '' ;
+
+            for(let browser_ in Manager.browsers.list) {  
+                let text_selected = Manager.browsers.default == browser_ ? "selected" : "" ;
+                browser_out += `<option value="${Manager.browsers.list[browser_]}" ${text_selected}>${Manager.encodeWithTextNode(browser_)}</option>` ;
+            }
+
+            return browser_out ;
+        },
+
+        // list of users
+        ListUsers:  {
+            id:             "list_users",
+            Obj:            null,
+            optionsDate:    { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 'hour': 'numeric', 'minute': 'numeric', 'second': 'numeric'},
+            optionsShortDate:    { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 'hour': 'numeric', 'minute': 'numeric'},
+
+            // clearing the user list selection area
+            clear:  function() {
+                if(! Manager.ListUsers.Obj) {
+                    Manager.ListUsers.Obj = window.document.getElementById(Manager.ListUsers.id) ;
+                }
+
+                if(! Manager.ListUsers.Obj) {
+                    console.error(`Not found element for id: ${Manager.ListUsers.id}`) ;
+                    return ;
+                }                
+                
+                Manager.ListUsers.Obj.innerHTML = "" ;
+            },
+
+            // add user to list
+            addUser:    function(id_user) {
+
+                if(! Manager.ListUsers.Obj) {
+                    Manager.ListUsers.Obj = window.document.getElementById(Manager.ListUsers.id) ;
+                }
+
+                if(! Manager.ListUsers.Obj) {
+                    console.error(`Not found element for id: ${Manager.ListUsers.id}`) ;
+                    return ;
+                }   
+
+                let user_name ;
+                for(let key of Object.keys(Manager.talkersConfig)) {
+                    if(Manager.talkersConfig[key].id == id_user) {
+                        user_name = key ;
+                        break ;
+                    }
+                }
+
+                if(! user_name) {
+                    console.error(`Invalid ${id_user}`) ;
+                    return  ;
+                }
+
+                let user_img = Manager.talkersConfig[user_name].img ? id_user : "avatar" ;
+
+                let last_date = '', 
+                    last_text = '',
+                    side_mess = '',
+                    time_stamp_mess = 0 ;
+
+                let list_id_chats = Object
+                                        .keys(Manager.talkersConfig[user_name].chats)
+                                        .map(
+                                            function (x) {
+                                                return parseInt(x, 10);
+                                            }
+                                        )
+                                        .sort((a, b) => b - a) ;
+
+                for(let i1 = 0 ; i1 < list_id_chats.length ; i1++) {
+                    let i = list_id_chats[i1] ;
+                    let j = Manager.talkersConfig[user_name].chats[i].length - 1;
+                    for(; j >= 0; j--) {
+                        if(Manager.talkersConfig[user_name].chats[i][j].type == 'N') {
+                            side_mess = Manager.talkersConfig[user_name].chats[i][j].side ;
+                            time_stamp_mess = Manager.talkersConfig[user_name].chats[i][j].time ;
+                            if(side_mess == "out") {
+                                last_text = Manager.talkersConfig[user_name].chats[i][j].source ;
+                            }
+                            else {
+                                last_text = Manager.talkersConfig[user_name].chats[i][j].translated ;
+                            }
+                            last_date = new Date(Manager.talkersConfig[user_name].chats[i][j].time * 1000)
+                                                    .toLocaleDateString(
+                                                                    Manager.mainConfig.lang,
+                                                                    Manager.ListUsers.optionsShortDate
+                                                                ) ;
+                            break ;
+                        }
+                    }
+
+                    if(side_mess != '') {
+                        break ;
+                    }
+                }
+
+                let user_content = `<div class="interviewer" id="user_${id_user}" onclick="Manager.UserMessages.loadBaseData(${id_user});">
+	                <img src="/${user_img}.png" class="interviewer" />
+	                <div class="name_interviewer">${Manager.encodeWithTextNode(user_name)}</div>
+	                <div class="last_mess_interviewer"><div class="native_date" ts="${time_stamp_mess}">${Manager.encodeWithTextNode(last_date)}</div><div class="native_text">${Manager.encodeWithTextNode(last_text)}</div></div>
+                </div>` ;
+
+                Manager.ListUsers.Obj.insertAdjacentHTML('beforeend', user_content) ;
+            },
+
+            // modifying user data in the left column
+            updateUser:     function(id_user) {
+
+                if(! Number.isInteger(id_user)) {
+                    console.error(`id_user isn't int, it's: ${typeof(id_user)}`) ;
+                    return ;
+                } else if(id_user <= 0) {
+                    console.error(`Invalid value: ${id_user} of id_user`) ;
+                    return ;
+                }
+
+                if(! Manager.ListUsers.Obj) {
+                    console.error("Undefined ListUsers.Obj") ;
+                    return ;
+                }
+
+                let node_tmp = window.document.getElementById(`user_${id_user}`) ;
+
+                if(node_tmp) {  // node found
+                    
+                    let img_node = node_tmp.querySelector(`.${Manager.ProfileInterlocutor.CssImgNode}`) ;
+                    if(! img_node) {
+                        console.error("Undefined img_node") ;
+                        return ;
+                    }
+
+                    let name_user_node = node_tmp.querySelector(".name_interviewer") ;
+                    if(! name_user_node) {
+                        console.error("Undefined img_node") ;
+                        return ;
+                    }
+
+                    let name_user ;
+                    for(let key_ in Manager.talkersConfig) {
+                        if(Manager.talkersConfig[key_].id == id_user) {
+                            name_user = key_ ;
+                            break ;
+                        }
+                    }
+
+                    if(! name_user) {
+                        console.error("Undefined name_user") ;
+                        return ;
+                    }
+
+                    img_node.src = Manager.talkersConfig[name_user].img ? `/${id_user}.png?${new Date().getTime()}` : "/avatar.png" ;
+                    name_user_node.replaceChildren(window.document.createTextNode(name_user)) ;
+
+                } else {    // node not found
+                    Manager.ListUsers.addUser(id_user) ;
+                }
+
+            },
+
+            // add all interlocutors to the left column
+            addAllUsers:    function() {
+
+                Manager.WaitingScreen.hide() ;
+
+                Manager.ListUsers.clear() ;
+
+                let list_id_users = {} ;
+
+                for(let user_name of Object.keys(Manager.talkersConfig)) {
+
+                    let last_timestamp = 0 ;
+
+                    let list_id_chats = Object
+                                            .keys(Manager.talkersConfig[user_name].chats)
+                                            .map(
+                                                function (x) {
+                                                    return parseInt(x, 10);
+                                                }
+                                            )
+                                            .sort((a, b) => b - a) ;
+
+                    for(let i1 = 0 ; i1 < list_id_chats.length ; i1++) {
+                        let i = list_id_chats[i1] ;
+                        let j = Manager.talkersConfig[user_name].chats[i].length - 1;
+                        for(; j >= 0; j--) {
+                            if(Manager.talkersConfig[user_name].chats[i][j].type == 'N') {
+                                last_timestamp = Manager.talkersConfig[user_name].chats[i][j].time ;
+                                break ;
+                            }
+                        }
+                        if(last_timestamp > 0) {
+                            break ;
+                        }
+                    }
+
+                    list_id_users[Manager.talkersConfig[user_name].id] = last_timestamp ;
+
+                }
+
+                const sorted_users = Object
+                            .keys(list_id_users)  
+                            .sort((key1, key2) => list_id_users[key2] - list_id_users[key1])  
+                            .reduce((obj, key) => ({ ...obj, [key]: list_id_users[key]}), {}) ;
+
+                for(let user_id of Object.keys(sorted_users)) {                             
+                    Manager.ListUsers.addUser(user_id) ;
+                }
+
+                Manager.TopMenu.init() ;    // Initiation of TopMenu & Co elements
+
+                Manager.SwitchLang.doSwitch() ; // switch to the main config language
+            },
+
+        },
+
+        // Top Menu
+        TopMenu:             {
+            IdUser:         "id_top_user",
+            ObjUser:        null,
+
+            IdImgUser:      "id_top_img_user",
+            ObjImgUser:     null,
+
+            IdClearHist:    "top_clear_history",
+            ObjClearHist:   null,
+
+            IdDelUser:      "top_del_user",
+            ObjDelUser:     null,
+
+            IdExit:         "top_exit",
+            ObjExit:        null,
+
+            IdProfileUser:  "top_profile_user",
+            ObjProfileUser: null,
+
+            IdConfig:       "top_config",
+            ObjConfig:      null,
+
+            IdHelp:         "top_help",
+            ObjHelp:        null,
+
+            IdHeadInter:    "head_interlocutors",
+            ObjHeadInter:   null,
+
+            IdStartChat:    "top_start_chat",
+            ObjStartChat:   null,
+
+            IdStopChat:    "top_stop_chat",
+            ObjStopChat:   null,
+
+            IdNewInter:    "new_interlocutor",
+            ObjNewInter:   null,
+
+            IdLangMess:    "lang_mess",     // message display language
+            ObjLangMess:   null,
+
+            init:           function() {
+                if(! (Manager.TopMenu.ObjUser = window.document.getElementById(Manager.TopMenu.IdUser))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdUser}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjImgUser = window.document.getElementById(Manager.TopMenu.IdImgUser))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdImgUser}`) ;
+                }                
+
+                if(! (Manager.TopMenu.ObjClearHist = window.document.getElementById(Manager.TopMenu.IdClearHist))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdClearHist}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjDelUser = window.document.getElementById(Manager.TopMenu.IdDelUser))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdDelUser}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjDelUser = window.document.getElementById(Manager.TopMenu.IdDelUser))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdDelUser}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjExit = window.document.getElementById(Manager.TopMenu.IdExit))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdExit}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjProfileUser = window.document.getElementById(Manager.TopMenu.IdProfileUser))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdProfileUser}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjConfig = window.document.getElementById(Manager.TopMenu.IdConfig))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdConfig}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjHelp = window.document.getElementById(Manager.TopMenu.IdHelp))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdHelp}`) ;
+                }                
+
+                if(! (Manager.TopMenu.ObjHeadInter = window.document.getElementById(Manager.TopMenu.IdHeadInter))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdHeadInter}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjStartChat = window.document.getElementById(Manager.TopMenu.IdStartChat))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdStartChat}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjStopChat = window.document.getElementById(Manager.TopMenu.IdStopChat))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdStopChat}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjNewInter = window.document.getElementById(Manager.TopMenu.IdNewInter))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdNewInter}`) ;
+                }
+
+                if(! (Manager.TopMenu.ObjLangMess = window.document.getElementById(Manager.TopMenu.IdLangMess))) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdLangMess}`) ;
+                }                
+            },
+
+            // exit
+            doExit:     function() {
+                if(! Manager.TopMenu.ObjExit) {
+                    console.error("Undefined ObjExit") ;
+                    return ;
+                }
+
+                // add exit command
+                Manager.listCommands.unshift({
+                         'com':        'exit',
+                    });
+
+                // guaranteed reboot in 5 sec.
+                setTimeout(function() {window.location.reload()}, 5000) ;
+            },
+
+            // Show Top Menu items
+            showMenuUnits:       function(id_user) {
+
+                if(! Number.isInteger(id_user)) {
+                    console.error(`id_user is ${typeof(id_user)}`) ;
+                    return false ;
+                } else if(id_user < 0) {
+                    console.error(`Invalid value: ${id_user} of id_user`) ;
+                    return false ;
+                }
+
+                let user_name, 
+                    found_img = 0 ;
+
+                for(let key of Object.keys(Manager.talkersConfig)) {
+                    if(Manager.talkersConfig[key].id == id_user) {
+                        user_name = key ;
+                        found_img = Manager.talkersConfig[key].img ;
+                        break ;
+                    }
+                }
+
+                if(id_user) {
+                    if(! user_name) {
+                        console.error(`Invalid ${id_user}`) ;
+                        return  false;
+                    }
+                }    
+
+                // Remove the CSS selection property from everything and add the property to the current node.
+                let list_current_nodes = window.document.querySelectorAll(`.${Manager.UserMessages.css_selected_user}`) ;
+                for(let i = 0 ; i < list_current_nodes.length ; i++) {
+                    list_current_nodes[i].classList.remove(Manager.UserMessages.css_selected_user) ;
+                }
+
+                if(id_user) {
+                    window.document.getElementById(`user_${id_user}`).classList.add(Manager.UserMessages.css_selected_user) ;
+                }
+
+                // display the interlocutor's avatar
+                if(! Manager.TopMenu.ObjImgUser) {
+                    console.error("Undefined ObjUser") ;
+                    return false ;
+                } else {
+                    let src_ = id_user ? (found_img ? `/${id_user}.png?${new Date().getTime()}`: "/avatar.png") : "/avatar.png" ;
+                    Manager.TopMenu.ObjImgUser.src = src_ ;
+                    let cssClass = "hide_any" ;
+                    if(id_user) {
+                        if(Manager.TopMenu.ObjImgUser.classList.contains(cssClass)) {
+                            Manager.TopMenu.ObjImgUser.classList.remove(cssClass) ;
+                        }
+                    } else if(! Manager.TopMenu.ObjImgUser.classList.contains(cssClass)) {
+                        Manager.TopMenu.ObjImgUser.classList.add(cssClass) ;
+                    }
+                }      
+
+                // display avatar title
+                if(! Manager.TopMenu.ObjUser) {
+                    console.error("Undefined ObjUser") ;
+                    return false ;
+                } else {
+                    Manager.TopMenu.ObjUser.replaceChildren() ;
+                    if(id_user) {
+                        Manager.TopMenu.ObjUser.appendChild(document.createTextNode(user_name)) ;
+                    }
+                    Manager.TopMenu.ObjUser.setAttribute("user_id", id_user) ;
+                    
+                    let cssClass = "hide_any" ;
+
+                    if(id_user) {
+                        if(Manager.TopMenu.ObjUser.classList.contains(cssClass)) {
+                            Manager.TopMenu.ObjUser.classList.remove(cssClass) ;
+                        }
+                    } else if(! Manager.TopMenu.ObjUser.classList.contains(cssClass)) {
+                        Manager.TopMenu.ObjUser.classList.add(cssClass) ;
+                    }
+                }
+
+                // Show the start conversation button
+                if(! Manager.TopMenu.ObjStartChat) {
+                    console.error("Undefined ObjStartChat") ;
+                    return false ;
+                } else {
+                    Manager.TopMenu.ObjStartChat.replaceChildren() ;
+                    if(id_user) {
+                        Manager.TopMenu.ObjStartChat.appendChild(document.createTextNode(Manager.langLables["startchat"][Manager.mainConfig.lang])) ;
+                    }
+                    Manager.TopMenu.ObjStartChat.style.display = id_user ? 'inline' : 'none' ;
+                }
+
+                // show the stop chat button
+                if(! Manager.TopMenu.ObjStopChat) {
+                    console.error("Undefined ObjStopChat") ;
+                    return false ;
+                }
+                else {
+                    Manager.TopMenu.ObjStopChat.replaceChildren() ;
+                    if(id_user) {
+                        Manager.TopMenu.ObjStopChat.appendChild(document.createTextNode(Manager.langLables["stopchat"][Manager.mainConfig.lang])) ;
+                    }
+                    Manager.TopMenu.ObjStopChat.style.display = 'none' ;
+                }
+
+                // show the clear history button
+                if(! Manager.TopMenu.ObjClearHist) {
+                    console.error("Undefined ObjClearHist") ;
+                    return false ;
+                } else {
+                    Manager.TopMenu.ObjClearHist.replaceChildren() ;
+                    if(id_user) {
+                        Manager.TopMenu.ObjClearHist.appendChild(document.createTextNode(Manager.langLables["clearhistory"][Manager.mainConfig.lang])) ;
+                    }
+                    Manager.TopMenu.ObjClearHist.style.display = id_user ? 'inline' : 'none' ;
+                }
+
+                // display the delete interlocutor button
+                if(! Manager.TopMenu.ObjDelUser) {
+                    console.error("Undefined ObjDelUser") ;
+                    return false ;
+                } else {
+                    Manager.TopMenu.ObjDelUser.replaceChildren() ;
+                    if(id_user) {
+                        Manager.TopMenu.ObjDelUser.appendChild(document.createTextNode(Manager.langLables["delthisinterlocutor"][Manager.mainConfig.lang])) ;
+                    }
+                    Manager.TopMenu.ObjDelUser.style.display = id_user ? 'inline' : 'none' ;
+                }                
+
+                // display the interlocutor's profile button
+                if(! Manager.TopMenu.ObjProfileUser) {
+                    console.error("Undefined ObjProfileUser") ;
+                    return false ;
+                } else {
+                    Manager.TopMenu.ObjProfileUser.replaceChildren() ;
+                    if(id_user) {
+                        Manager.TopMenu.ObjProfileUser.appendChild(document.createTextNode(Manager.langLables["profileinterlocutor"][Manager.mainConfig.lang])) ;
+                    }
+                    Manager.TopMenu.ObjProfileUser.style.display = id_user ? 'inline' : 'none' ;
+                }
+
+                return true ;
+            },
+
+            // processing change of message language display
+            onChangeLangMess:       function() {
+                if(! Manager.TopMenu.ObjLangMess) {
+                    console.error("ObjLangMess is undefined") ;
+                    return false ;
+                }
+
+                if(! Manager.UserMessages.Obj) {
+                    return ;
+                }
+
+                let list_dev_top = Manager.UserMessages.Obj.querySelectorAll(".test") ;
+
+                for(let i = 0 ; i < list_dev_top.length ; i++) {
+                    let NodeNative = list_dev_top[i].querySelector(".native_text"),
+                        NodeOtherText = list_dev_top[i].querySelector(".other_text") ;
+
+                    if(! NodeNative) {
+                        console.error("Undefined NodeNative") ;
+                        continue ;
+                    } else if(! NodeOtherText) {
+                        console.error("Undefined NodeOtherText") ;
+                        continue ;
+                    }
+
+                    if(list_dev_top[i].classList.contains('my_text')) { // my messages
+                        switch(Manager.TopMenu.ObjLangMess.value) {
+                            case 'a':
+                                NodeNative.style.display = '' ;
+                                NodeOtherText.style.display = '' ;
+                                break ;
+                            case 'm':
+                                NodeNative.style.display = '' ;
+                                NodeOtherText.style.display = 'none' ;
+                                break ;
+                            case 'o':
+                                NodeNative.style.display = 'none' ;
+                                NodeOtherText.style.display = '' ;
+                                break ;
+                            default:
+                                console.error(`Invalid Lanfmess: ${Manager.TopMenu.ObjLangMess.value}`) ;
+                        }
+                    } else {    // third-party messages
+                        switch(Manager.TopMenu.ObjLangMess.value) {
+                            case 'a':
+                                NodeNative.style.display = '' ;
+                                NodeOtherText.style.display = '' ;
+                                break ;
+                            case 'm':
+                                NodeNative.style.display = '' ;
+                                NodeOtherText.style.display = 'none' ;
+                                break ;
+                            case 'o':
+                                NodeNative.style.display = 'none' ;
+                                NodeOtherText.style.display = '' ;
+                                break ;
+                            default:
+                                console.error(`Invalid Lanfmess: ${Manager.TopMenu.ObjLangMess.value}`) ;
+                        }
+                    }
+                }
+            },
+
+            // show the current user's profile
+            showProfileCurentUser:      function() {
+                if(! (Manager.TopMenu.ObjUser = window.document.getElementById(Manager.TopMenu.IdUser))) {
+                    console.error("Undefined ObjUser") ;
+                    return false ;
+                }
+
+                let user_id = parseInt(Manager.TopMenu.ObjUser.getAttribute("user_id"), 10) ;
+                if(user_id < 0) {
+                    console.error(`Invalid value: ${user_id} of user_id`) ;
+                    return ;
+                } else if(! user_id) {  // the interlocutor is not defined
+                    return ;
+                }
+
+                Manager.ProfileInterlocutor.showProfile(user_id);
+            },
+
+            // clearing the interlocutor's history
+            clearHistory:       function() {
+
+                if(! Manager.TopMenu.ObjUser) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdUser}`) ;
+                    return ;
+                }
+
+                let user_id = Manager.TopMenu.ObjUser.getAttribute("user_id") ;
+
+                if((user_id = parseInt(user_id, 10)) <= 0) {
+                    console.error(`Invalid user_id: ${user_id}`) ;
+                    return ;
+                }
+
+                if(! confirm(Manager.langLables["clearhistory"][Manager.mainConfig.lang] + ' ?')) {
+                    return ;
+                }
+
+                Manager.WaitingScreen.show(Manager.langLables["processing"][Manager.mainConfig.lang]) ;
+                
+                // Add a command to stop chat
+                Manager.listCommands.unshift(
+                    {
+                        'com':  'stopchat',
+                    },
+                    {
+                        'com':  "clearhistory",
+                        'id':   user_id,
+                    }                
+                );
+
+            },
+
+            // remove interlocutor
+            delUser:       function() {
+
+                if(! Manager.TopMenu.ObjUser) {
+                    console.error(`Not found element for id: ${Manager.TopMenu.IdUser}`) ;
+                    return ;
+                }
+
+                let user_id = Manager.TopMenu.ObjUser.getAttribute("user_id") ;
+
+                if((user_id = parseInt(user_id, 10)) <= 0) {
+                    console.error(`Invalid user_id: ${user_id}`) ;
+                    return ;
+                }
+
+                if(! confirm(Manager.langLables["delthisinterlocutor"][Manager.mainConfig.lang] + ' ?')) {
+                    return ;
+                }
+
+                Manager.WaitingScreen.show(Manager.langLables["processing"][Manager.mainConfig.lang]) ;
+
+                // Add a command to stop chat
+                Manager.listCommands.unshift(
+                    {
+                        'com':  'stopchat',
+                    },
+                    {
+                        'com':  "delinterlocutor",
+                        'id':   user_id,
+                    }                
+                );
+
+            },
+
+            // start chat
+            startChat:      function() {
+                if(! Manager.TopMenu.ObjUser) {
+                    console.error("Undefined ObjUser") ;
+                    return ;
+                }
+
+                let user_id = parseInt(Manager.TopMenu.ObjUser.getAttribute("user_id"), 10) ;
+
+                if(user_id <= 0) {
+                    console.error(`Invalid user_id: ${user_id}`) ;
+                    return ;
+                }
+
+                if(Manager.mainConfig.real_output_idx == -1) {
+                    alert(Manager.langLables["emptysound"][Manager.mainConfig.lang]) ;
+                    return ;
+                }
+
+                if(Manager.mainConfig.real_input_idx == -1) {
+                    alert(Manager.langLables["emptymic"][Manager.mainConfig.lang]) ;
+                    return ;
+                }
+
+                Manager.UserMessages.startTalking(user_id) ;
+            },
+
+            // stop chat
+            stopChat:      function() {
+                if(! Manager.TopMenu.ObjUser) {
+                    console.error("Undefined ObjUser") ;
+                    return ;
+                }
+
+                let user_id = parseInt(Manager.TopMenu.ObjUser.getAttribute("user_id"), 10) ;
+
+                if(user_id <= 0) {
+                    console.error(`Invalid user_id: ${user_id}`) ;
+                    return ;
+                }
+
+                Manager.WaitingScreen.show(Manager.langLables["stopchat"][Manager.mainConfig.lang]) ;
+
+                Manager.listCommands.unshift(
+                    {
+                        'com':      'stopchat',
+                        'main':     1,             // main chat stop
+                    },
+                );                
+            },
+
+            // deleting a chat
+            delChat:        function(num_chat) {
+                if(! Number.isInteger(num_chat)) {
+                    console.error(`num_chat is ${typeof(num_chat)}`) ;
+                    return ;
+                } else if(num_chat < 1) {
+                    console.error(`Invalid value: ${num_chat} of num_chat`) ;
+                    return ;
+                }
+
+                if(! Manager.TopMenu.ObjUser) {
+                    console.error("Undefined ObjUser") ;
+                    return ;
+                }
+
+                let user_id = parseInt(Manager.TopMenu.ObjUser.getAttribute("user_id"), 10) ;
+
+                if(user_id <= 0) {
+                    console.error(`Invalid user_id: ${user_id}`) ;
+                    return ;
+                }                
+
+                Manager.WaitingScreen.show(Manager.langLables["delchatnow"][Manager.mainConfig.lang]) ;
+
+                Manager.listCommands.unshift(
+                    {
+                        'com':          'delchat',
+                        'user_id':      user_id,
+                        'num_chat':     num_chat,
+                    },
+                );                
+
+            },
+
+            // mixed start/stop actions
+            mixActionChat:      function(event) {
+                let act = event.target.getAttribute("act"),
+                    num_chat = parseInt(event.target.getAttribute("num_chat"), 10)
+                ;
+
+                switch(act) {
+                    case "s":   // start
+                        Manager.TopMenu.startChat();
+                        break ;
+                    case "e":   // end
+                        Manager.TopMenu.stopChat();
+                        break ;
+                    case "d":   // delete this cat
+                        Manager.TopMenu.delChat(num_chat);
+                        break ;
+                    default:
+                        console.error(`Invalid action: ${act}`) ;
+                }
+            },
+
+        },
+
+        // Right column
+        RightColumn:    {
+            Id:             "right-column",
+            Obj:            null,
+
+            minScroolTop:   200,    // minimal scroll top
+
+            init:   function() {
+
+                if(! (Manager.RightColumn.Obj = window.document.getElementById(Manager.RightColumn.Id))) {
+                    console.error(`Not found elementfor id: ${Manager.RightColumn.Id}`) ;
+                    return ;                   
+                }
+
+                Manager.RightColumn.Obj.addEventListener(
+                    'scroll',
+                    function(event) {
+                        let user_id = parseInt(Manager.TopMenu.ObjUser.getAttribute("user_id"), 10) ;
+                        if(! user_id) {
+                            return ;
+                        } else if(user_id <= 0) {
+                            console.error(`Invalid user_id: ${user_id}`) ;
+                            return ;
+                        }
+                        
+                        let list_chats = [],
+                            found_user = false ;
+
+                        for(let key of Object.keys(Manager.talkersConfig)) {
+                            if(Manager.talkersConfig[key].id == user_id) {
+                                found_user = true ;
+                                for(let num_chat of Object.keys(Manager.talkersConfig[key].chats)) {
+                                    if(typeof(Manager.talkersConfig[key].chats[num_chat]) == 'number') {
+                                        list_chats.push(num_chat) ;
+                                    }
+                                }
+                            }
+                        }
+
+                        if(! found_user) {
+                            console.error(`Not found user for id: ${user_id}`) ;
+                        }
+
+                        if(list_chats.length) {
+                            if(event.srcElement.scrollTop <= Manager.RightColumn.minScroolTop) {
+                                Manager.listCommands.unshift({
+                                    'com':        'getchat',
+                                    'user_id':    user_id, 
+                                    'list_chats': list_chats.sort((a, b) => b - a)
+                                });
+                            }
+                        }
+                    }) ;
+            }
+
+        },
+
+        // switching languages
+        SwitchLang:         {
+
+            doSwitch:       function() {
+
+                // tag Interlocutors
+                if(Manager.TopMenu.ObjHeadInter) {
+                    Manager.TopMenu.ObjHeadInter.replaceChildren() ;
+                    Manager.TopMenu.ObjHeadInter.appendChild(document.createTextNode(Manager.langLables["interlocutors"][Manager.mainConfig.lang])) ;
+                } else {
+                    console.error("Undefined ObjHeadInter")
+                }
+
+                // Help label
+                if(Manager.TopMenu.ObjHelp) {
+                    Manager.TopMenu.ObjHelp.replaceChildren() ;
+                    Manager.TopMenu.ObjHelp.appendChild(document.createTextNode(Manager.langLables["help"][Manager.mainConfig.lang])) ;
+                } else {
+                    console.error("Undefined ObjHelp")
+                }
+
+                // Exit label
+                if(Manager.TopMenu.ObjExit) {
+                    Manager.TopMenu.ObjExit.replaceChildren() ;
+                    Manager.TopMenu.ObjExit.appendChild(document.createTextNode(Manager.langLables["exit"][Manager.mainConfig.lang])) ;
+                } else {
+                    console.error("Undefined ObjExit")
+                }
+
+                // Configuration label
+                if(Manager.TopMenu.ObjConfig) {
+                    Manager.TopMenu.ObjConfig.replaceChildren() ;
+                    Manager.TopMenu.ObjConfig.appendChild(document.createTextNode(Manager.langLables["configuration"][Manager.mainConfig.lang])) ;
+                    Manager.TopMenu.ObjConfig.style.display = '' ;
+                } else {
+                    console.error("Undefined ObjConfig")
+                }
+
+                // Interlocutor's Profile label
+                if(Manager.TopMenu.ObjProfileUser) {
+                    Manager.TopMenu.ObjProfileUser.replaceChildren() ;
+                    Manager.TopMenu.ObjProfileUser.appendChild(document.createTextNode(Manager.langLables["profileinterlocutor"][Manager.mainConfig.lang])) ;
+                    if(Manager.TopMenu.ObjProfileUser) {
+                        Manager.TopMenu.ObjProfileUser.style.display = Manager.TopMenu.ObjUser.getAttribute("user_id") ? '' : 'none' ;
+                    } else {
+                        Manager.TopMenu.ObjProfileUser.style.display = 'none' ;
+                        console.error("Undefined ObjProfileUser") ;
+                    }
+
+                } else {
+                    console.error("Undefined ObjProfileUser")
+                }
+
+                // Delete interlocutor label
+                if(Manager.TopMenu.ObjDelUser) {
+                    Manager.TopMenu.ObjDelUser.replaceChildren() ;
+                    Manager.TopMenu.ObjDelUser.appendChild(document.createTextNode(Manager.langLables["delthisinterlocutor"][Manager.mainConfig.lang])) ;
+                    if(Manager.TopMenu.ObjDelUser) {
+                        Manager.TopMenu.ObjDelUser.style.display = Manager.TopMenu.ObjUser.getAttribute("user_id") ? '' : 'none' ;
+                    } else {
+                        Manager.TopMenu.ObjDelUser.style.display = 'none' ;
+                        console.error("Undefined ObjProfileUser") ;
+                    }
+
+                } else {
+                    console.error("Undefined ObjDelUser")
+                }
+
+                // Clear history label
+                if(Manager.TopMenu.ObjClearHist) {
+                    Manager.TopMenu.ObjClearHist.replaceChildren() ;
+                    Manager.TopMenu.ObjClearHist.appendChild(document.createTextNode(Manager.langLables["clearhistory"][Manager.mainConfig.lang])) ;
+                    if(Manager.TopMenu.ObjClearHist) {
+                        Manager.TopMenu.ObjClearHist.style.display = Manager.TopMenu.ObjUser.getAttribute("user_id") ? '' : 'none' ;
+                    } else {
+                        Manager.TopMenu.ObjClearHist.style.display = 'none' ;
+                        console.error("Undefined ObjProfileUser") ;
+                    }
+
+                } else {
+                    console.error("Undefined ObjClearHist")
+                }
+
+                // Start Chat label
+                if(Manager.TopMenu.ObjStartChat) {
+                    Manager.TopMenu.ObjStartChat.replaceChildren() ;
+                    Manager.TopMenu.ObjStartChat.appendChild(document.createTextNode(Manager.langLables["startchat"][Manager.mainConfig.lang])) ;
+                    if(Manager.TopMenu.ObjStartChat && !Manager.statusChat) {
+                        Manager.TopMenu.ObjStartChat.style.display = Manager.TopMenu.ObjUser.getAttribute("user_id") ? '' : 'none' ;
+                    } else {
+                        Manager.TopMenu.ObjStartChat.style.display = 'none' ;
+                        console.error("Undefined ObjStartChat") ;
+                    }
+
+                } else {
+                    console.error("Undefined ObjStartChat")
+                }
+
+                // Stop Chat label
+                if(Manager.TopMenu.ObjStopChat) {
+                    Manager.TopMenu.ObjStopChat.replaceChildren() ;
+                    Manager.TopMenu.ObjStopChat.appendChild(document.createTextNode(Manager.langLables["stopchat"][Manager.mainConfig.lang])) ;
+                    if(Manager.TopMenu.ObjStopChat && !Manager.statusChat) {
+                        Manager.TopMenu.ObjStopChat.style.display = Manager.TopMenu.ObjUser.getAttribute("user_id") ? '' : 'none' ;
+                    } else {
+                        Manager.TopMenu.ObjStopChat.style.display = 'none' ;
+                        console.error("Undefined ObjStartChat") ;
+                    }
+
+                } else {
+                    console.error("Undefined ObjStopChat")
+                }
+
+                // date modification
+                let list_dates = window.document.querySelectorAll(".native_date") ;
+                for(let i = 0 ; i < list_dates.length ; i++) {
+                    let time_attr = list_dates[i].getAttribute("ts") ;
+                    if(time_attr) {
+                        if((time_attr = parseInt(time_attr, 10))) {
+                            list_dates[i].replaceChildren() ;
+                            
+                            list_dates[i].appendChild(
+                                    window.document.createTextNode(
+                                            new Date(time_attr * 1000)
+                                                    .toLocaleDateString(
+                                                                    Manager.mainConfig.lang,
+                                                                    Manager.ListUsers.optionsShortDate
+                                                                )
+                            )) ;
+                        }
+                    }
+                }
+
+                // tag new interlocutor
+                if(Manager.TopMenu.ObjNewInter) {
+                    Manager.TopMenu.ObjNewInter.replaceChildren() ;
+                    Manager.TopMenu.ObjNewInter.appendChild(document.createTextNode(Manager.langLables["newinterlocutor"][Manager.mainConfig.lang])) ;
+                    Manager.TopMenu.ObjNewInter.classList.remove("hide_any") ;
+                } else {
+                    console.error("Undefined ObjNewInter")
+                }
+
+                // display messages for language types
+                if(Manager.TopMenu.ObjLangMess) {
+
+                    let old_val = Manager.TopMenu.ObjLangMess.value ;
+
+                    Manager.TopMenu.ObjLangMess.replaceChildren() ;
+
+                    let val_to_name = {
+                        'a':    'alllangmess',
+                        'm':    'mylangmess',
+                        'o':    'interlocutorlangmess',
+                    } ;
+                    let inner_html = '' ;
+                    for(let key in val_to_name) {
+                        inner_html += `<option value="${key}">${Manager.encodeWithTextNode(Manager.langLables[val_to_name[key]][Manager.mainConfig.lang])}</option>` ;
+                    }
+
+                    Manager.TopMenu.ObjLangMess.innerHTML = inner_html ;
+                    if(old_val) {
+                        Manager.TopMenu.ObjLangMess.value = old_val ;
+                    }
+
+                    Manager.TopMenu.ObjLangMess.classList.remove("hide_any") ;
+                } else {
+                    console.error("Undefined ObjLangMess")
+                }                
+
+                // setting document.title
+                document.title = Manager.langLables["audiochats"][Manager.mainConfig.lang] ;
+            }
+        },
+
+        // user message display area
+        UserMessages:        {
+            topSelector:   "#right-column .dummy-content",
+            Obj:           null,
+
+            topSelector2:   "h2",
+            ObjH2:          null,
+
+            css_selected_user:  "selected_interviewer",
+
+            clear:         function() {
+                if(! Manager.UserMessages.Obj) {
+                    if(! (Manager.UserMessages.Obj = document.querySelector(Manager.UserMessages.topSelector))) {
+                        console.error(`Not found Node for selector: ${Manager.UserMessages.topSelector}`) ;
+                        return ;
+                    }
+                }
+
+                Manager.UserMessages.Obj.innerHTML = '' ;
+            },
+
+            findObjH2:  function() {
+                Manager.UserMessages.ObjH2 = null ;
+
+                if(! Manager.UserMessages.Obj) {
+                    console.error("Not found UserMessages.Obj") ;
+                    return ;                    
+                }
+
+                Manager.UserMessages.ObjH2 = Manager.UserMessages.Obj.querySelector(Manager.UserMessages.topSelector2) ;
+                
+                return Manager.UserMessages.ObjH2 ;
+            },
+
+            // loading basic data
+            loadBaseData:       function(id_user,
+                                         list_need_chats = []   // list of necessary chats
+                                        ) {
+
+                if(! Number.isInteger(id_user)) {
+                    console.error(`id_user is ${typeof(id_user)}`) ;
+                    return ;
+                } else if(! Array.isArray(list_need_chats)) {
+                    console.error(`list_need_chats is ${typeof(list_need_chats)}`) ;
+                    return ;
+                }
+
+                if(! list_need_chats.length) {  // clear the message area if the array is empty
+                    Manager.UserMessages.clear() ;
+                } else if(! Manager.UserMessages.findObjH2()) {   // search ObjH2
+                    return ;
+                }
+
+                if(! Manager.UserMessages.Obj) { 
+                    comsp;e.error("Not found TopNode messages") ;
+                    return ;
+                }
+
+                let user_name, 
+                    found_img = 0 ;
+
+                for(let key of Object.keys(Manager.talkersConfig)) {
+                    if(Manager.talkersConfig[key].id == id_user) {
+                        user_name = key ;
+                        found_img = Manager.talkersConfig[key].img ;
+                        break ;
+                    }
+                }
+
+                if(! user_name) {
+                    console.error(`Invalid ${id_user}`) ;
+                    return  ;
+                }
+
+                // Add a command to stop chat
+                Manager.listCommands.unshift({
+                         'com':        'stopchat',
+                    });
+
+                if(! Manager.TopMenu.showMenuUnits(id_user)) {
+                    return ;
+                }
+
+                for(let id_chat of Object.keys(Manager.talkersConfig[user_name].chats)) {
+                    id_chat = parseInt(id_chat, 10) ;
+                    if(! Number.isInteger(Manager.talkersConfig[user_name].chats[id_chat])) {
+                        if(list_need_chats.length) {    // partial output of chats
+                            if(list_need_chats.indexOf(
+                                            id_chat,
+                                            0
+                                        ) == -1) {  // the item is not in the list
+                                continue ;
+                            }
+                        }
+                        // enumeration chat messages
+                        let last_side = '',
+                            last_date_string = ''
+                            ;
+                        for(let i = 0 ; i < Manager.talkersConfig[user_name].chats[id_chat].length ; i++) {
+
+                            let mess_unit = "",
+                                type_mess = Manager.talkersConfig[user_name].chats[id_chat][i].type
+                                ;
+                            let date_string = new Date(Manager.talkersConfig[user_name].chats[id_chat][i][type_mess == 'F' ? "start": "time"] * 1000)
+                                                    .toLocaleDateString(
+                                                        Manager.mainConfig.lang, // "en", 
+                                                        Manager.ListUsers.optionsShortDate
+                                                    )
+                                ;
+
+                            if(type_mess == 'F') {  // first message
+                                last_side = last_date_string = '' ;
+                                mess_unit = `
+                <h2 style="clear: both" num_chat="${Manager.talkersConfig[user_name].chats[id_chat][i].num}"><span class="chat_numb">${Manager.encodeWithTextNode(Manager.langLables["chatn"][Manager.mainConfig.lang])}</span> ${Manager.talkersConfig[user_name].chats[id_chat][i].num} (${Manager.talkersConfig[user_name].chats[id_chat][0].langs}), <span class="date_start_chat">${date_string}</span>
+                    <button class="button_chat_action" num_chat="${Manager.talkersConfig[user_name].chats[id_chat][i].num}" act="d" onclick="Manager.TopMenu.mixActionChat(event);">${Manager.encodeWithTextNode(Manager.langLables["deletechat"][Manager.mainConfig.lang])}</button>
+                </h2>` ;
+                            } else if(type_mess == 'N') { // next message
+                                let side_mess = Manager.talkersConfig[user_name].chats[id_chat][i].side,
+                                    source_mess = Manager.talkersConfig[user_name].chats[id_chat][i].source,
+                                    translated_message = Manager.talkersConfig[user_name].chats[id_chat][i].translated
+                                ;
+                                if(side_mess == 'in') { // incoming message
+                                    let outer_style_css = '',
+                                        inner_style_css = '' ;
+                                    
+                                    switch(Manager.TopMenu.ObjLangMess.value) {
+                                        case 'a':
+                                            break ;
+                                        case 'm':
+                                            outer_style_css = 'display: none;' ;
+                                            break ;
+                                        case 'o':
+                                            inner_style_css = 'display: none;' ;
+                                            break ;
+                                    }
+
+                                    mess_unit = `
+                <div class="test" num_chat="${Manager.talkersConfig[user_name].chats[id_chat][i].num}">
+                    <div class="other_text" style="${outer_style_css}">
+                        ${Manager.encodeWithTextNode(source_mess)}
+                    </div>
+                    <div class="native_text" style="${inner_style_css}">
+                        ${Manager.encodeWithTextNode(translated_message)}
+                    </div>
+                    <div class="date_message">${Manager.encodeWithTextNode(date_string)}</div>
+                </div>` ;
+                                } else if(side_mess == 'out') {    // outgoing message
+                                    let outer_style_css = '',
+                                        inner_style_css = '' ;
+
+                                    switch(Manager.TopMenu.ObjLangMess.value) {
+                                        case 'a':
+                                            break ;
+                                        case 'm':
+                                            outer_style_css = 'display: none;' ;
+                                            break ;
+                                        case 'o':
+                                            inner_style_css = 'display: none;' ;
+                                            break ;
+                                    }
+
+                                    mess_unit = `
+                <div class="test my_text" num_chat="${Manager.talkersConfig[user_name].chats[id_chat][i].num}">
+                    <div class="native_text" style="${inner_style_css}">
+                        ${Manager.encodeWithTextNode(source_mess)}
+                    </div>
+                    <div class="other_text" style="${outer_style_css}">
+                        ${Manager.encodeWithTextNode(translated_message)}
+                    </div>
+                    <div class="date_message">${Manager.encodeWithTextNode(date_string)}</div>
+                </div>` ;
+                                }
+                                else {
+                                    console.error(`Invalid type of mesage: ${type_mess}`) ;
+                                    continue ;
+                                }
+                            } else {
+                                console.error(`Invalid type of mesage: ${type_mess}`) ;
+                                continue ;
+                            }
+
+                            if(! list_need_chats.length) {  // list_need_chats is empty
+                                Manager.UserMessages.Obj.insertAdjacentHTML('beforeend', mess_unit) ;
+                            } else {    // The chat list is not there
+                                if(! Manager.UserMessages.ObjH2) {
+                                    console.error("ObjH2 is empty") ; 
+                                    return ;
+                                }
+                                Manager.UserMessages.ObjH2.insertAdjacentHTML('beforebegin', mess_unit) ;
+                            }
+
+                            if(type_mess == 'N') {  // This is a real message.
+                                let list_nodes_date = Manager.UserMessages.Obj.querySelectorAll('.date_message') ;
+                                if(list_nodes_date.length > 1) {
+                                    let old_css = list_nodes_date[list_nodes_date.length - 2].parentNode.classList.contains('my_text'),
+                                        curr_css = list_nodes_date[list_nodes_date.length - 1].parentNode.classList.contains('my_text'),
+                                        old_date = list_nodes_date[list_nodes_date.length - 2].textContent,
+                                        curr_date = list_nodes_date[list_nodes_date.length - 1].textContent,
+                                        old_num_chat = list_nodes_date[list_nodes_date.length - 2].parentNode.getAttribute('num_chat'),
+                                        curr_num_chat = list_nodes_date[list_nodes_date.length - 1].parentNode.getAttribute('num_chat')
+                                        ;
+                                    
+                                    if(old_css === curr_css 
+                                       && old_date === curr_date
+                                       && old_num_chat === curr_num_chat) {
+                                        list_nodes_date[list_nodes_date.length - 2].style.display = 'none' ;
+                                        list_nodes_date[list_nodes_date.length - 2].parentNode.style.marginBottom = '0' ;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if(! list_need_chats.length) {  // list_need_chats is empty
+                    Manager.UserMessages.Obj.insertAdjacentHTML('beforeend', `<button class="width_button" act="s" onclick="Manager.TopMenu.mixActionChat(event);">${Manager.encodeWithTextNode(Manager.langLables["startchat"][Manager.mainConfig.lang])}</button>`) ;
+                    Manager.UserMessages.Obj.parentNode.scrollTop = Manager.UserMessages.Obj.parentNode.scrollHeight ;  // скролирование страницы в низ
+                } else {
+                    Manager.UserMessages.Obj.parentNode.scrollTop = Manager.UserMessages.ObjH2.offsetTop - 100 ;
+                }
+            },
+            
+            // starting a conversation
+            startTalking:       function(user_id) {
+                if(! Number.isInteger(user_id)) {
+                    console.error(`user_id is ${typeof(user_id)}`) ;
+                    return ;
+                }
+                else if(user_id < 0) {
+                    console.error(`Invalid value: ${user_id} of user_id`) ;
+                    return ;
+                }
+
+                let user_name = null ;
+                for(let user_ in Manager.talkersConfig) { 
+                    if(Manager.talkersConfig[user_].id == user_id) {
+                        user_name = user_ ;
+                        break ;
+                    }
+                }
+
+                if(! user_name) {
+                    console.error(`Not found user for id: ${user_id}`) ;
+                    return ;
+                }
+
+                if(Manager.mainConfig.real_output_idx == -1) {
+                    console.error(Manager.langLables["emptysound"][Manager.mainConfig.lang]) ;
+                    return ;
+                }
+
+                if(Manager.mainConfig.real_input_idx == -1) {
+                    console.error(Manager.langLables["emptymic"][Manager.mainConfig.lang]) ;
+                    return ;
+                }
+
+
+                Manager.UserMessages.loadBaseData(user_id);
+
+                Manager.WaitingScreen.show(Manager.langLables["silencemode"][Manager.mainConfig.lang]) ;
+
+                Manager.listCommands.unshift(
+                    {
+                        'com':      'stopchat',
+                    },
+                    {
+                        'com':      'startchat',
+                        'id':       user_id,
+                    },
+                );
+            }
+        },
+
+        // interlocutor's profile
+        ProfileInterlocutor:    {
+
+            userId:             0,  // interlocutor's code
+
+            CssImgNode:         "interviewer",
+            ImgNode:            null,   // img of the interlocutor
+            img:                0,  // image feature
+
+            CssSelectImgNode:   "select_img",
+            SelectImgNode:      null,   // image selection node
+
+            CssNickName:        "nickname",
+            NickNameNode:       null,   // NickName node
+
+            CssSelectLangs:     "select_langs",
+            SelectLangs:        null,   // language knot
+
+            CssAboutNickname:   "about_nickname",
+            AboutNicknameNode:  null,
+
+            PreviewNode:        null,   // Interlocutor's avatar preview node
+            IdPreviewNode:      "preview",
+            Base64Preview:      "",     // base64 representation of the avatar
+
+            HeadNode:           null,   // interlocutor's profile title
+            cssHead:            "user_profile_head",
+
+            UseMicNode:         null,   // use a microphone
+            cssUseMic:          "use_mic",
+
+            SaveCommand:        "saveuserprofile",
+
+            clearNodes:         function() {
+                Manager.ProfileInterlocutor.user_id = 0 ;
+                Manager.ProfileInterlocutor.img = 0 ;
+                Manager.ProfileInterlocutor.ImgNode = null ;
+                Manager.ProfileInterlocutor.SelectImgNode = null ;
+                Manager.ProfileInterlocutor.NickNameNode = null ;
+                Manager.ProfileInterlocutor.SelectLangs = null ;
+                Manager.ProfileInterlocutor.AboutNicknameNode = null ;
+                Manager.ProfileInterlocutor.PreviewNode = null ;
+                Manager.ProfileInterlocutor.Base64Preview = "" ;
+                Manager.ProfileInterlocutor.HeadNode = null ;
+                Manager.ProfileInterlocutor.UseMicNode = null ;
+            },
+
+            showProfile:       function(user_id) {
+
+                Manager.ProfileInterlocutor.clearNodes() ;
+
+                if(! Number.isInteger(user_id)) {
+                    console.error(`user_id is ${typeof(user_id)}`) ;
+                    return ;
+                }
+                else if(user_id < 0) {
+                    console.error(`Invalid value: ${user_id} of user_id`) ;
+                    return ;
+                } else {
+                    Manager.ProfileInterlocutor.user_id = user_id ;
+                }
+
+                let num_img = 'avatar.png',
+                    user_name = '', 
+                    about = '',
+                    lang = 'en',
+                    checked_text = user_id ? '' : 'checked' ;
+
+                if(user_id) {
+                    for (let name_ in Manager.talkersConfig) {
+                        if(Manager.talkersConfig[name_].id == user_id) {
+                            Manager.ProfileInterlocutor.img = Manager.talkersConfig[name_].img ;
+                            if(Manager.talkersConfig[name_].img) {
+                                num_img = `${user_id}.png?${new Date().getTime()}` ;
+                            } else {
+                                num_img = "avatar.png"
+                            }
+                            user_name = name_ ;
+                            about = Manager.talkersConfig[name_].about ;
+                            lang = Manager.talkersConfig[name_].lang ;
+                            checked_text = Manager.talkersConfig[name_].usemic ? "checked" : "" ;
+                            break ;
+                        }
+                    }
+                }
+
+                if(! Manager.UserMessages.Obj) {
+                    console.error("UserMessages.Obj is undefined") ;
+                    return ;
+                }
+            
+                Manager.UserMessages.clear() ;
+
+                // Add a command to stop chat
+                Manager.listCommands.unshift({
+                         'com':        'stopchat',
+                    });
+
+                if(! Manager.TopMenu.showMenuUnits(user_id)) {
+                    return false ;
+                }
+
+                let contentHtml = `
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2" class="${Manager.ProfileInterlocutor.cssHead}" style="text-align: center;" user_id="${Manager.ProfileInterlocutor.user_id}">${Manager.encodeWithTextNode(Manager.langLables[user_id ? "profileinterlocutor" : "newprofinterlocutor"][Manager.mainConfig.lang])}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width: 20%;">${Manager.encodeWithTextNode(Manager.langLables["nickname"][Manager.mainConfig.lang])}</td>
+                <td><input type="text" class="nickname" maxlength="25" placeholder="${Manager.addShalses(Manager.langLables["entervalue"][Manager.mainConfig.lang])}" value="${Manager.addShalses(user_name)}" /></td>
+            </tr>
+            <tr>
+                <td>${Manager.encodeWithTextNode(Manager.langLables["lang"][Manager.mainConfig.lang])}</td>
+                <td><select class="select_langs">${Manager.getLangsString(lang)}</select></td>
+            </tr>
+            <tr>
+                <td>${Manager.encodeWithTextNode(Manager.langLables["descr"][Manager.mainConfig.lang])}</td>
+                <td><textarea class="about_nickname" maxlength="300" placeholder="${Manager.addShalses(Manager.langLables["entervalue"][Manager.mainConfig.lang])}">${Manager.encodeWithTextNode(about)}</textarea></td>
+            </tr>
+            <tr>
+                <td>${Manager.encodeWithTextNode(Manager.langLables["usemic"][Manager.mainConfig.lang])}</td>
+                <td><input type="checkbox" class="use_mic" ${checked_text} /></td>
+            </tr>            
+            <tr>
+                <td>${Manager.encodeWithTextNode(Manager.langLables["image"][Manager.mainConfig.lang])}</td>
+                <td><input type="file" name="file" class="select_img" accept="image/*" /> 
+		            <img src="/${num_img}" class="interviewer defcurs">
+		            <img src="/close.png" title="${Manager.addShalses(Manager.langLables["delimage"][Manager.mainConfig.lang])}" onclick="Manager.ProfileInterlocutor.delImg();" />
+		        </td>
+            </tr>
+            <tr>                
+                <td colSpan=2>
+                    <h4 id="preview"></h4>                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="button_tab" type="submit" onclick="Manager.ProfileInterlocutor.doSave();">${Manager.encodeWithTextNode(Manager.langLables["save"][Manager.mainConfig.lang])}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>` ;
+
+                Manager.UserMessages.Obj.innerHTML = contentHtml ;
+
+                let TabNode = Manager.UserMessages.Obj.querySelector('table') ;
+
+                if(! TabNode) {
+                    console.error("Undefined TabNode") ;
+                    return ;
+                } else if(! (Manager.ProfileInterlocutor.ImgNode = TabNode.querySelector(`.${Manager.ProfileInterlocutor.CssImgNode}`))) {
+                    console.error("Undefined TabNode") ;
+                    return ;
+                } else if(! (Manager.ProfileInterlocutor.SelectImgNode = TabNode.querySelector(`.${Manager.ProfileInterlocutor.CssSelectImgNode}`))) {
+                    console.error("Undefined SelectImgNode") ;
+                    return ;
+                } else if(! (Manager.ProfileInterlocutor.NickNameNode = TabNode.querySelector(`.${Manager.ProfileInterlocutor.CssNickName}`))) {
+                    console.error("Undefined NickNameNode") ;
+                    return ;
+                } else if(! (Manager.ProfileInterlocutor.SelectLangs = TabNode.querySelector(`.${Manager.ProfileInterlocutor.CssSelectLangs}`))) {
+                    console.error("Undefined SelectLangs") ;
+                    return ;
+                } else if(! (Manager.ProfileInterlocutor.AboutNicknameNode = TabNode.querySelector(`.${Manager.ProfileInterlocutor.CssAboutNickname}`))) {
+                    console.error("Undefined AboutNicknameNode") ;
+                    return ;
+                } else if(! (Manager.ProfileInterlocutor.PreviewNode = window.document.getElementById(Manager.ProfileInterlocutor.IdPreviewNode))) {
+                    console.error("Undefined PreviewNode") ;
+                    return ;
+                } else if(! (Manager.ProfileInterlocutor.HeadNode = window.document.querySelector(`.${Manager.ProfileInterlocutor.cssHead}`))) {
+                    console.error("Undefined HeadNode") ;
+                    return ;
+                }  else if(! (Manager.ProfileInterlocutor.UseMicNode = window.document.querySelector(`.${Manager.ProfileInterlocutor.cssUseMic}`))) {
+                    console.error("Undefined UseMicNode") ;
+                    return ;
+                }
+
+                Manager.ProfileInterlocutor.SelectImgNode.addEventListener(
+                    'change', e => {
+                        const [file] = Manager.ProfileInterlocutor.SelectImgNode.files ;
+                        const url = URL.createObjectURL(file) ;
+
+                        Manager.ProfileInterlocutor.PreviewNode.innerHTML = `<img width="64" height="64" src="${url}" />` ;
+                        
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onloadend = function() {
+                            Manager.ProfileInterlocutor.Base64Preview = reader.result.split(";base64,", 2)[1] ;
+                        }
+                }) ;
+            },
+
+            // delete image
+            delImg:         function() {
+                if(! Manager.ProfileInterlocutor.ImgNode) {
+                    console.error("Undefined ImgNode") ;
+                    return ;
+                } else if(! Manager.ProfileInterlocutor.SelectImgNode) {
+                    console.error("Undefined SelectImgNode") ;
+                    return ;
+                } else if(! Manager.ProfileInterlocutor.PreviewNode) {
+                    console.error("Undefined PreviewNode") ;
+                    return ;
+                }
+
+                Manager.ProfileInterlocutor.img = 0 ;
+                Manager.ProfileInterlocutor.ImgNode.src = "/avatar.png" ;
+                Manager.ProfileInterlocutor.SelectImgNode.value = '' ;
+                Manager.ProfileInterlocutor.PreviewNode.replaceChildren() ;
+                Manager.ProfileInterlocutor.Base64Preview = "" ;
+            },
+
+            // save changes
+            doSave:     function() {
+
+                if(! Manager.ProfileInterlocutor.NickNameNode) {
+                    console.error("Undefined NickNameNode") ;
+                    return ; 
+                } else if(! Manager.ProfileInterlocutor.AboutNicknameNode) {
+                    console.error("Undefined AboutNicknameNode") ;
+                    return ; 
+                }
+
+                if( !(Manager.ProfileInterlocutor.NickNameNode.value = Manager.ProfileInterlocutor.NickNameNode.value.trim())) {
+                    alert(Manager.langLables["emptynickname"][Manager.mainConfig.lang]) ;
+                    Manager.ProfileInterlocutor.NickNameNode.focus() ;
+                    return ;
+                }
+
+                Manager.ProfileInterlocutor.AboutNicknameNode.value = Manager.ProfileInterlocutor.AboutNicknameNode.value.trim()
+
+                if(Manager.ProfileInterlocutor.NickNameNode.value in Manager.talkersConfig) {
+                    if(Manager.talkersConfig[Manager.ProfileInterlocutor.NickNameNode.value].id != Manager.ProfileInterlocutor.user_id) {
+                        alert(Manager.langLables["dupnickname"][Manager.mainConfig.lang]) ;
+                        Manager.ProfileInterlocutor.NickNameNode.focus() ;
+                        return ;
+                    }
+                }
+
+                if(Manager.ProfileInterlocutor.SelectImgNode.value != '') {
+                    Manager.ProfileInterlocutor.img = 1 ;
+                }
+
+                Manager.WaitingScreen.show(Manager.langLables["savingdata"][Manager.mainConfig.lang]) ;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/submituserprofile');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify([{
+                    'com':        Manager.ProfileInterlocutor.SaveCommand,
+                    'id':         Manager.ProfileInterlocutor.user_id,
+                    'img':        Manager.ProfileInterlocutor.img,
+                    'imgpath':    Manager.ProfileInterlocutor.Base64Preview,
+                    'nickname':   Manager.ProfileInterlocutor.NickNameNode.value,
+                    'about':      Manager.ProfileInterlocutor.AboutNicknameNode.value,
+                    'lang':       Manager.ProfileInterlocutor.SelectLangs.value,
+                    'usemic':     Manager.ProfileInterlocutor.UseMicNode.checked ? 1 : 0,
+                }])) ;
+
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4) {    // the request has been processed and the response is ready
+                        if(xhr.status != 200) {
+                            Manager.WaitingScreen.hide() ;
+                            alert(Manager.langLables["errsenddata"][Manager.mainConfig.lang]) ;
+                        }                       
+                    }
+                }
+            },
+
+            // modification of the profile appearance
+            updateProfile:      function(data_in) {
+                if(! (typeof data_in === 'object' && !Array.isArray(data_in) && data_in !== null)) {
+                    console.error(`data_in is ${typeof(data_in)}`) ;
+                    return ;
+                }
+
+                if(! Manager.ProfileInterlocutor.ImgNode) {
+                    console.error("Undefined ImgNode") ;
+                    return ;
+                } else {
+                    Manager.ProfileInterlocutor.ImgNode.src = data_in["img"] ? `/${data_in["id"]}.png?${new Date().getTime()}` : "/avatar.png" ;
+                }
+
+                if(! Manager.ProfileInterlocutor.SelectImgNode) {
+                    console.error("Undefined SelectImgNode") ;
+                    return ;
+                } else {
+                    Manager.ProfileInterlocutor.SelectImgNode.value = "" ;
+                }
+
+                if(! Manager.ProfileInterlocutor.NickNameNode) {
+                    console.error("Undefined NickNameNode") ;
+                    return ;
+                } else {
+                    Manager.ProfileInterlocutor.NickNameNode.value = data_in["name"] ;
+                }
+
+                if(! Manager.ProfileInterlocutor.SelectLangs) {
+                    console.error("Undefined SelectLangs") ;
+                    return ;
+                } else {
+                    Manager.ProfileInterlocutor.SelectLangs.value = data_in["lang"] ;
+                }
+
+                if(! Manager.ProfileInterlocutor.AboutNicknameNode) {
+                    console.error("Undefined AboutNicknameNode") ;
+                    return ;
+                } else {
+                    Manager.ProfileInterlocutor.AboutNicknameNode.value = data_in["about"] ;
+                }
+
+                if(! Manager.ProfileInterlocutor.PreviewNode) {
+                    console.error("Undefined PreviewNode") ;
+                    return ;
+                } else {
+                    Manager.ProfileInterlocutor.PreviewNode.replaceChildren() ;
+                }
+
+                if(! Manager.ProfileInterlocutor.HeadNode) {
+                    console.error("Undefined HeadNode") ;
+                    return ;
+                } else {
+                    Manager.ProfileInterlocutor.HeadNode.user_id = data_in["id"] ;
+                    Manager.ProfileInterlocutor.HeadNode.replaceChildren(window.document.createTextNode(Manager.langLables["profileinterlocutor"][Manager.mainConfig.lang])) ;
+                }
+
+                Manager.ProfileInterlocutor.Base64Preview = "" ;
+                Manager.ProfileInterlocutor.user_id = data_in["id"] ;
+                Manager.ProfileInterlocutor.img = data_in["img"] ;
+            },
+        },
+
+        // Main Configuration Management
+        ManagerMainConfig:  {
+
+            SelectLangNode:     null,
+            cssSelectLang:      "select_langs",
+
+            SelectSoundNode:    null,
+            cssSelectSound:     "select_sounds",
+
+            SelectMicNode:      null,
+            cssSelectMic:       "select_mic",
+
+            SelectBrowserNode:  null,
+            cssSelectBrowser:   "select_browser",
+
+            clear:          function() {
+                Manager.ManagerMainConfig.SelectLangNode = null ;
+                Manager.ManagerMainConfig.SelectSoundNode = null ;
+                Manager.ManagerMainConfig.SelectMicNode = null ;
+                Manager.ManagerMainConfig.SelectBrowserNode = null ;
+            },
+
+            // show configuration
+            showConfig:     function() {
+
+                if(! Manager.UserMessages.Obj) {
+                    console.error("UserMessages.Obj is undefined") ;
+                    return ;
+                }
+
+                Manager.ManagerMainConfig.clear() ;
+
+                // Add a command to stop chat
+                Manager.listCommands.unshift({
+                        'com':        'stopchat',
+                    });
+
+                Manager.TopMenu.showMenuUnits(0) ;
+
+                Manager.UserMessages.clear() ;                    
+
+                let contentHtml = `
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2" class="${Manager.ProfileInterlocutor.cssHead}" style="text-align: center;">${Manager.encodeWithTextNode(Manager.langLables["configuration"][Manager.mainConfig.lang])}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>${Manager.encodeWithTextNode(Manager.langLables["lang"][Manager.mainConfig.lang])}</td>
+                <td><select class="select_langs">${Manager.getLangsString(Manager.mainConfig.lang)}</select></td>
+            </tr>
+            <tr>
+                <td>${Manager.encodeWithTextNode(Manager.langLables["soundspeaker"][Manager.mainConfig.lang])}</td>
+                <td><select class="select_sounds">${Manager.getSoundString()}</select></td>
+            </tr>
+            <tr>
+                <td>${Manager.encodeWithTextNode(Manager.langLables["microphone"][Manager.mainConfig.lang])}</td>
+                <td><select class="select_mic">${Manager.getMicrophoneString()}</select></td>
+            </tr>
+
+            <tr>
+                <td>${Manager.encodeWithTextNode(Manager.langLables["webbrowser"][Manager.mainConfig.lang])}</td>
+                <td><select class="select_browser">${Manager.getBrowsersString()}</select></td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <button class="button_tab" type="submit" onclick="Manager.ManagerMainConfig.doSave();">${Manager.encodeWithTextNode(Manager.langLables["save"][Manager.mainConfig.lang])}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>` ;
+
+                Manager.UserMessages.Obj.innerHTML = contentHtml ;
+
+                if(! (Manager.ManagerMainConfig.SelectLangNode = Manager.UserMessages.Obj.querySelector(`.${Manager.ManagerMainConfig.cssSelectLang}`))) {
+                    console.error("Undefined SelectLangNode") ;
+                    return ;
+                } else if(! (Manager.ManagerMainConfig.SelectSoundNode = Manager.UserMessages.Obj.querySelector(`.${Manager.ManagerMainConfig.cssSelectSound}`))) {
+                    console.error("Undefined SelectSoundNode") ;
+                    return ;
+                } else if(! (Manager.ManagerMainConfig.SelectMicNode = Manager.UserMessages.Obj.querySelector(`.${Manager.ManagerMainConfig.cssSelectMic}`))) {
+                    console.error("Undefined SelectSoundNode") ;
+                    return ;
+                }  else if(! (Manager.ManagerMainConfig.SelectBrowserNode = Manager.UserMessages.Obj.querySelector(`.${Manager.ManagerMainConfig.cssSelectBrowser}`))) {
+                    console.error("Undefined SelectBrowserNode") ;
+                    return ;
+                }
+
+            },
+
+            doSave:     function() {
+                if(! Manager.ManagerMainConfig.SelectLangNode) {
+                    console.error("Undefined SelectLangNode") ;
+                    return ;
+                } else if(! Manager.ManagerMainConfig.SelectSoundNode) {
+                    console.error("Undefined SelectSoundNode") ;
+                    return ;
+                } else if(! Manager.ManagerMainConfig.SelectMicNode) {
+                    console.error("Undefined SelectMicNode") ;
+                    return ;                    
+                }  else if(! Manager.ManagerMainConfig.SelectBrowserNode) {
+                    console.error("Undefined SelectBrowserNode") ;
+                    return ;                    
+                }
+
+                let name_sound = '',
+                    name_mic = '' ;
+
+                for(let key_ in Manager.soundOutDevice) { 
+                    if(parseInt(Manager.ManagerMainConfig.SelectSoundNode.value, 10) == Manager.soundOutDevice[key_]) {
+                        name_sound = key_ ;
+                    }
+                }
+
+                if(! name_sound) {
+                    alert(Manager.langLables["emptysound"][Manager.mainConfig.lang]) ;
+                    return ;
+                }
+
+                for(let key_ in Manager.soundInDevice) { 
+                    if(parseInt(Manager.ManagerMainConfig.SelectMicNode.value, 10) == Manager.soundInDevice[key_]) {
+                        name_mic = key_ ;
+                    }
+                }
+
+                if(! name_mic) {
+                    alert(Manager.langLables["emptymic"][Manager.mainConfig.lang]) ;
+                    return ;
+                }
+
+                Manager.listCommands.unshift(
+                    {
+                        'com':              'stopchat',
+                    },
+                    {
+                        'com':              'savemainconfig',
+                        'lang':             Manager.ManagerMainConfig.SelectLangNode.value,
+                        'real_output_name': name_sound,
+                        'real_output_idx':  parseInt(Manager.ManagerMainConfig.SelectSoundNode.value, 10),
+                        'real_input_name':  name_mic,
+                        'real_input_idx':   parseInt(Manager.ManagerMainConfig.SelectMicNode.value, 10),
+                        'browser':          Manager.ManagerMainConfig.SelectBrowserNode.value,
+                    }
+                );
+
+                Manager.WaitingScreen.show(Manager.langLables["processing"][Manager.mainConfig.lang]) ;
+
+            }
+        },
+
+        // waiting screen
+        WaitingScreen:      {
+            TopNode:    null,
+            IdTopNode:  "topblink1",
+
+            DetNode:    null,
+            IdDetNode:  "blink1",
+
+            CssHide:    "hide_any",
+
+            TimeStart:  0,  // operation start time
+            TimeEnd:    0,  // end time of the operation
+
+            LoadingText:     "Loading ...",
+            TimeWait:        120,    // waiting time in sec.
+            TimeWaitLoading: 240,    // Loading wait time in sec.
+            TimeDelt:        500,    // test run time in msec
+
+            CurrentText:    "", // current text
+
+            clear:      function() {
+                Manager.WaitingScreen.TopNode = null ;
+                Manager.WaitingScreen.DetNode = null ;
+                Manager.WaitingScreen.TimeStart = 0 ;
+                Manager.WaitingScreen.TimeEnd = 0 ;
+                Manager.WaitingScreen.CurrentText = "" ;
+            },
+
+            init:       function() {
+                Manager.WaitingScreen.clear() ;
+
+                if(! (Manager.WaitingScreen.TopNode = window.document.getElementById(Manager.WaitingScreen.IdTopNode))) {
+                    console.error(`Not found element for id: ${Manager.WaitingScreen.IdTopNode}`) ;
+                    return ;
+                } else if(! (Manager.WaitingScreen.DetNode = window.document.getElementById(Manager.WaitingScreen.IdDetNode))) {
+                    console.error(`Not found element for id: ${Manager.WaitingScreen.IdDetNode}`) ;
+                    return ;
+                }
+                // handling hanging commands
+                setInterval(
+                    function() {
+                        let time_end = Manager.WaitingScreen.TimeEnd ;
+                        if(time_end) {
+                            if(Math.floor(Date.now() / 1000) - time_end > 0) {
+                                let curr_text = Manager.WaitingScreen.CurrentText ;
+                                Manager.WaitingScreen.hide() ;
+                                if(curr_text == Manager.WaitingScreen.LoadingText) { // Loading ...
+                                    window.location.reload() ;
+                                } else if(Manager.mainConfig && Manager.langLables) { // There is data on mainConfig & langLables
+                                    alert(Manager.langLables["repeatcurrentoperation"][Manager.mainConfig.lang]) ;
+                                } else {    // no data on mainConfig & langLables
+                                    window.location.reload() ;
+                                }
+
+                            }
+                        }
+                    },
+                    Manager.WaitingScreen.TimeDelt,
+                ) ;
+
+            },
+
+            // show flashing text
+            show:       function(text_in) {
+                if(typeof(text_in) != "string") {
+                    console.error(`text_in is ${typeof(text_in)}`) ;
+                    return ;
+                } else if(! text_in.length) {
+                    console.error("text_in is empty") ;
+                    return ;
+                }
+
+                if(! Manager.WaitingScreen.TopNode) {
+                    console.error("Undefined TopNode") ;
+                    return ;
+                } else if(! Manager.WaitingScreen.DetNode) {
+                    console.error("Undefined DetNode") ;
+                    return ;
+                }
+
+                Manager.WaitingScreen.DetNode.classList.remove('long_text') ;
+                Manager.WaitingScreen.DetNode.replaceChildren() ;
+                if(text_in.length >= 20) {
+                    Manager.WaitingScreen.DetNode.classList.add('long_text') ;
+                }
+                Manager.WaitingScreen.DetNode.appendChild(document.createTextNode(text_in)) ;
+
+                if(Manager.WaitingScreen.TopNode.classList.contains(Manager.WaitingScreen.CssHide)) {
+                    Manager.WaitingScreen.TopNode.classList.remove(Manager.WaitingScreen.CssHide) ;
+                }
+
+                Manager.WaitingScreen.CurrentText = text_in ;
+                Manager.WaitingScreen.TimeStart = Math.floor(Date.now() / 1000) ;
+                Manager.WaitingScreen.TimeEnd = Manager.WaitingScreen.TimeStart + (text_in == Manager.WaitingScreen.LoadingText ? Manager.WaitingScreen.TimeWaitLoading : Manager.WaitingScreen.TimeWait) ;
+
+            },
+
+            // hide blinking text
+            hide:       function() {
+                if(! Manager.WaitingScreen.TopNode) {
+                    console.error("Undefined TopNode") ;
+                    return ;
+                } else if(! Manager.WaitingScreen.DetNode) {
+                    console.error("Undefined DetNode") ;
+                    return ;
+                }
+
+                Manager.WaitingScreen.TimeStart = 0 ;
+                Manager.WaitingScreen.TimeEnd = 0 ;
+                Manager.WaitingScreen.CurrentText = "" ;
+
+                Manager.WaitingScreen.DetNode.classList.remove('long_text') ;
+
+                Manager.WaitingScreen.DetNode.replaceChildren() ;
+                Manager.WaitingScreen.TopNode.classList.add(Manager.WaitingScreen.CssHide) ;
+
+            },
+
+        },
+
+        // vertical demarcation positions
+        LeftRight:          {
+
+            LeftColumnNode:     null,
+            IdLeftColumn:       "left-column",
+
+            RightColumnNode:     null,
+            IdRightColumn:       "right-column",
+
+            init:           function() {
+                if(! (Manager.LeftRight.LeftColumnNode = window.document.getElementById(Manager.LeftRight.IdLeftColumn))) {
+                    console.error(`Not found element for id: ${Manager.LeftRight.IdLeftColumn}`) ;
+                    return ;                    
+                } else if(! (Manager.LeftRight.RightColumnNode = window.document.getElementById(Manager.LeftRight.IdRightColumn))) {
+                    console.error(`Not found element for id: ${Manager.LeftRight.IdRightColumn}`) ;
+                    return ;                    
+                }
+            },
+
+            // loading LeftRight data
+            loadLeftRight:      function(comm_in) {
+
+                if(! Manager.LeftRight.LeftColumnNode) {
+                    console.error("Undefined LeftColumnNode") ;
+                    return ;
+                } else if(! Manager.LeftRight.RightColumnNode) {
+                    console.error("Undefined RightColumnNode") ;
+                    return ;
+                }                
+
+                Manager.LeftRight.LeftColumnNode.style.width = comm_in["left"] ;
+                Manager.LeftRight.RightColumnNode.style.width = comm_in["right"] ;
+
+            },
+
+            // saving CSS properties
+            saveCss:        function() {
+                if(! Manager.LeftRight.LeftColumnNode) {
+                    console.error("Undefined LeftColumnNode") ;
+                    return ;
+                } else if(! Manager.LeftRight.RightColumnNode) {
+                    console.error("Undefined RightColumnNode") ;
+                    return ;
+                }
+
+                Manager.listCommands.unshift(
+                    {
+                        'com':      'saveleftright',
+                        'left':     Manager.LeftRight.LeftColumnNode.style.width,
+                        'right':    Manager.LeftRight.RightColumnNode.style.width,
+                    }
+                );
+            },
+
+        },
+
+        // Help section
+        Help:       {
+
+            helpData:   {},
+
+            CableA:     "CABLE-A Output (VB-Audio Cable A)",
+            CableB:     "CABLE-B Input (VB-Audio Cable B)",
+
+            // clearing parameters
+            clear:          function() {
+
+            },
+
+            // loading data
+            loadHelpData:   function(data_in) {
+                Manager.Help.helpData = data_in ;
+            },
+
+            // get an encoded portion of data
+            getUnitHelp:        function(ind_) {
+                return Manager.encodeWithTextNode(Manager.Help.helpData[Manager.mainConfig['lang']][ind_]) ;
+            },
+
+            // get the encoded value of an attribute
+            getUnitHelpAttr:    function(ind_) {
+                return Manager.addShalses(Manager.Help.helpData[Manager.mainConfig['lang']][ind_]) ;
+            },
+
+            // show help section
+            showHelp:       function() {
+
+                if(! Manager.UserMessages.Obj) {
+                    console.error("UserMessages.Obj is undefined") ;
+                    return ;
+                } else if(! Manager.LeftRight.RightColumnNode) {
+                    console.error("RightColumnNode is undefined") ;
+                    return ;                    
+                }
+
+                if(! Manager.Help.helpData[Manager.mainConfig['lang']]) {
+                    console.error(`Not found help for language: ${Manager.mainConfig['lang']}`) ;
+                    return ;
+                }
+
+                Manager.Help.clear() ;
+
+                // Add a command to stop chat
+                Manager.listCommands.unshift({
+                        'com':        'stopchat',
+                    });
+
+                Manager.TopMenu.showMenuUnits(0) ;
+
+                Manager.UserMessages.clear() ;
+
+                let listLanguages = '' ;
+                
+                for(let lang_ in Manager.languages) { 
+                    listLanguages += `<li>${Manager.encodeWithTextNode(lang_)}</li>` ;
+                }
+
+                let text_22_1 = Manager.Help.getUnitHelp(22), 
+                    text_22_2 = `"${Manager.Help.CableA}"`, 
+                    text_23_1 = Manager.Help.getUnitHelp(23), 
+                    text_23_2 = `"${Manager.Help.CableB}"`,
+                    text_64_1 = Manager.Help.getUnitHelp(64),
+                    text_64_2 = `(<a href="#section5.5">${Manager.Help.getUnitHelp(11)}</a>)`,
+                    text_113_1 = Manager.Help.getUnitHelp(113),
+                    text_113_2 = `<a href="#section5.2">${Manager.Help.getUnitHelp(8)}</a>`,
+                    text_author_1 = `${Manager.encodeWithTextNode(Manager.langLables["author"][Manager.mainConfig.lang])}:`,
+                    text_author_2 = "AI's lover"
+                    ;
+
+                if(["ar", "he", "fa", "ur"].indexOf(Manager.mainConfig['lang']) != -1) {
+                    text_22_1 = `"${Manager.Help.CableA}"` ;
+                    text_22_2 = Manager.Help.getUnitHelp(22) ; 
+                    text_23_1 = `"${Manager.Help.CableB}"` ;
+                    text_23_2 = Manager.Help.getUnitHelp(23) ;
+                    text_64_1 = text_64_2 ;
+                    text_64_2 = Manager.Help.getUnitHelp(64) ;
+                    text_113_1 = text_113_2 ;
+                    text_113_2 = Manager.Help.getUnitHelp(113) ;
+                    text_author_1 = "lover AI's" ;
+                    text_author_2 = `:${Manager.encodeWithTextNode(Manager.langLables["author"][Manager.mainConfig.lang])}` ;
+                }
+
+                let contentHtml = `
+<article>
+    <h1 class="author">${text_author_1} ${text_author_2}</h1>
+    <h1 class="author">Email: <a href="mailto:artaudiochats@outlook.com" target="_blank">artaudiochats@outlook.com</a></h1>
+    <h1 class="author">Telegram: <a href="https://t.me/artaudiochats" target="_blank">@artaudiochats</a></h1>
+    <h1 class="author">Site: <a href="https://artaudiochats.livejournal.com/${Manager.langLables["partweblink"][Manager.mainConfig.lang]}" target="_blank">artaudiochats.livejournal.com</a></h1>
+    <h1 id="top_help">${Manager.Help.getUnitHelp(0)}</h1>
+    <div class="toc">
+        <h2 id="list_help_content">${Manager.Help.getUnitHelp(1)}</h2>
+            <ul>
+                <li><a href="#section1">${Manager.Help.getUnitHelp(2)}</a></li>
+                <li><a href="#section2">${Manager.Help.getUnitHelp(3)}</a></li>
+                <li><a href="#section3">${Manager.Help.getUnitHelp(4)}</a></li>
+                <li><a href="#section4">${Manager.Help.getUnitHelp(5)}</a></li>
+                <li><a href="#section5">${Manager.Help.getUnitHelp(6)}</a></li>
+                <li class="sub_point"><a href="#section5.1">${Manager.Help.getUnitHelp(7)}</a></li>
+                <li class="sub_point"><a href="#section5.2">${Manager.Help.getUnitHelp(8)}</a></li>
+                <li class="sub_point"><a href="#section5.3">${Manager.Help.getUnitHelp(9)}</a></li>
+                <li class="sub_point"><a href="#section5.4">${Manager.Help.getUnitHelp(10)}</a></li>
+                <li class="sub_point"><a href="#section5.5">${Manager.Help.getUnitHelp(11)}</a></li>
+                <li class="sub_point"><a href="#section5.6">${Manager.Help.getUnitHelp(12)}</a></li>
+                <li class="sub_point"><a href="#section5.7">${Manager.Help.getUnitHelp(13)}</a></li>
+                <li class="sub_point"><a href="#section5.8">${Manager.Help.getUnitHelp(14)}</a></li>
+                <li class="sub_point"><a href="#section5.9">${Manager.Help.getUnitHelp(15)}</a></li>
+                <li class="sub_point"><a href="#section5.10">${Manager.Help.getUnitHelp(16)}</a></li>
+                <li><a href="#section6">${Manager.Help.getUnitHelp(17)}</a></li>
+        </ul>
+    </div>
+    <h2 id="section1" class="header_help">${Manager.Help.getUnitHelp(2)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(18)}</p>
+    <img class="img_help" src="/StartVC.png" title="${Manager.Help.getUnitHelpAttr(19)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(19)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(20)}</p>
+    <img class="img_help" src="/VCabsDef.png" title="${Manager.Help.getUnitHelpAttr(21)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(21)}</p>
+    <p class="desc_help">${text_22_1} ${text_22_2}</p>
+    <p class="desc_help">${text_23_1} ${text_23_2}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(24)}</p>
+    <img class="img_help" src="/VCabs.png" title="${Manager.Help.getUnitHelpAttr(25)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(25)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(26)}</p>
+    <h2 id="section2" class="header_help">${Manager.Help.getUnitHelp(3)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(27)}</p>
+    <h2 id="section3" class="header_help">${Manager.Help.getUnitHelp(4)}</h2>
+    <ul class="available_langs">${listLanguages}</ul>
+    <p class="desc_help">${Manager.Help.getUnitHelp(28)}</p>
+
+    <h2 id="section4" class="header_help">${Manager.Help.getUnitHelp(5)}</h2>
+    <ul class="available_langs">
+        <li>${Manager.Help.getUnitHelp(29)}</li>
+        <li>${Manager.Help.getUnitHelp(30)}</li>
+        <li>${Manager.Help.getUnitHelp(31)}</li>
+        <li>${Manager.Help.getUnitHelp(32)}</li>
+        <li>${Manager.Help.getUnitHelp(33)}</li>
+    </ul>
+
+    <h2 id="section5" class="header_help">${Manager.Help.getUnitHelp(6)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(34)}</p>
+
+    <h2 id="section5.1" class="header_help">${Manager.Help.getUnitHelp(7)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(35)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/config.jpg" title="${Manager.Help.getUnitHelpAttr(36)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(36)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(37)}</p>
+    <ul class="available_langs">
+        <li>${Manager.Help.getUnitHelp(38)}</li>
+        <li>${Manager.Help.getUnitHelp(39)}</li>
+        <li>${Manager.Help.getUnitHelp(40)}</li>
+        <li>${Manager.Help.getUnitHelp(41)}</li>
+    </ul>
+    <p class="desc_help">${Manager.Help.getUnitHelp(42)}</p>
+
+    <h2 id="section5.2" class="header_help">${Manager.Help.getUnitHelp(8)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(43)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/newprofile.jpg" title="${Manager.Help.getUnitHelpAttr(44)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(44)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(45)}</p>
+    <ul class="available_langs">
+        <li>${Manager.Help.getUnitHelp(46)}</li>
+        <li>${Manager.Help.getUnitHelp(47)}</li>
+        <li>${Manager.Help.getUnitHelp(48)}</li>
+        <li>${Manager.Help.getUnitHelp(49)}</li>
+        <li>${Manager.Help.getUnitHelp(50)}</li>
+    </ul>
+    <p class="desc_help">${Manager.Help.getUnitHelp(51)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(52)}</p>
+
+    <h2 id="section5.3" class="header_help">${Manager.Help.getUnitHelp(9)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(53)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/help.jpg" title="${Manager.Help.getUnitHelpAttr(54)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(54)}</p>    
+
+    <h2 id="section5.4" class="header_help">${Manager.Help.getUnitHelp(10)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(55)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/exit.jpg" title="${Manager.Help.getUnitHelpAttr(56)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(56)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(57)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(58)}</p>
+
+    <h2 id="section5.5" class="header_help">${Manager.Help.getUnitHelp(11)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(59)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/listinter.jpg" title="${Manager.Help.getUnitHelpAttr(60)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(60)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(61)}</p>
+
+    <h2 id="section5.6" class="header_help">${Manager.Help.getUnitHelp(12)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(62)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/histmess.jpg" title="${Manager.Help.getUnitHelpAttr(63)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(63)}</p>
+    <p class="desc_help">${text_64_1} ${text_64_2}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(65)}</p>
+    <ul class="available_langs">
+        <li>${Manager.Help.getUnitHelp(66)}</li>
+        <li>${Manager.Help.getUnitHelp(67)}</li>
+        <li>${Manager.Help.getUnitHelp(68)}</li>
+        <li>${Manager.Help.getUnitHelp(69)}</li>
+        <li>${Manager.Help.getUnitHelp(70)}</li>
+        <li>${Manager.Help.getUnitHelp(71)}</li>
+    </ul>
+    <p class="desc_help">${Manager.Help.getUnitHelp(72)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(73)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(74)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(75)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(76)}</p>
+    <ul class="available_langs">
+        <li>${Manager.Help.getUnitHelp(77)}</li>
+        <li>${Manager.Help.getUnitHelp(78)}</li>
+    </ul>
+    <p class="desc_help">${Manager.Help.getUnitHelp(79)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(80)}</p>
+    <ul class="available_langs">
+        <li>${Manager.Help.getUnitHelp(81)}</li>
+        <li>${Manager.Help.getUnitHelp(82)}</li>
+    </ul>
+    <p class="desc_help">${Manager.Help.getUnitHelp(83)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(84)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(85)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(86)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(87)}</p>
+
+    <p class="desc_help">${Manager.Help.getUnitHelp(88)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(89)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(90)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(91)}</p>
+
+    <p class="desc_help">${Manager.Help.getUnitHelp(92)}</p>
+    <ul class="available_langs">
+        <li>${Manager.Help.getUnitHelp(93)}</li>
+        <li>${Manager.Help.getUnitHelp(94)}</li>
+        <li>${Manager.Help.getUnitHelp(95)}</li>
+        <li>${Manager.Help.getUnitHelp(96)}</li>
+        <li>${Manager.Help.getUnitHelp(97)}</li>
+        <li>${Manager.Help.getUnitHelp(98)}</li>
+        <li>${Manager.Help.getUnitHelp(99)}</li>
+    </ul>
+
+    <p class="desc_help">${Manager.Help.getUnitHelp(100)}</p>
+    <ul class="available_langs">
+        <li>${Manager.Help.getUnitHelp(101)}</li>
+        <li>${Manager.Help.getUnitHelp(102)}</li>
+        <li>${Manager.Help.getUnitHelp(103)}</li>
+    </ul>
+    <p class="desc_help">${Manager.Help.getUnitHelp(104)}</p>
+
+    <h2 id="section5.7" class="header_help">${Manager.Help.getUnitHelp(13)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(105)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/clearhist.jpg" title="${Manager.Help.getUnitHelpAttr(106)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(106)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(107)}</p>
+
+    <h2 id="section5.8" class="header_help">${Manager.Help.getUnitHelp(14)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(108)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/delinter.jpg" title="${Manager.Help.getUnitHelpAttr(109)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(109)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(110)}</p>
+
+    <h2 id="section5.9" class="header_help">${Manager.Help.getUnitHelp(15)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(111)}</p>
+    <img class="img_help img_brow" src="/${Manager.mainConfig['lang']}/profinter.jpg" title="${Manager.Help.getUnitHelpAttr(112)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(112)}</p>
+    <p class="desc_help">${text_113_1} ${text_113_2}</p>
+
+    <h2 id="section5.10" class="header_help">${Manager.Help.getUnitHelp(16)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(114)}</p>
+    <img class="img_help img_brow" src="/delimiter.jpg" title="${Manager.Help.getUnitHelpAttr(115)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(115)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(116)}</p>
+
+
+    <h2 id="section6" class="header_help">${Manager.Help.getUnitHelp(17)}</h2>
+    <p class="desc_help">${Manager.Help.getUnitHelp(117)}</p>
+    <img class="img_help" src="/StartVC.png" title="${Manager.Help.getUnitHelpAttr(118)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(118)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(119)}</p>
+    <img class="img_help" src="/VCabs.png" title="${Manager.Help.getUnitHelpAttr(120)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(120)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(121)}</p>
+    <img class="img_help" src="/VCabsDef.png" title="${Manager.Help.getUnitHelpAttr(122)}">
+    <p class="image-caption">${Manager.Help.getUnitHelp(122)}</p>
+    <p class="desc_help">${Manager.Help.getUnitHelp(123)}</p>
+    
+</article>
+                `;
+
+                Manager.UserMessages.Obj.innerHTML = contentHtml ;
+
+                Manager.LeftRight.RightColumnNode.scrollTop = 0
+            },
+
+        },
+
+        init:       function() {
+            let url = location.search;
+
+            let query = url.substr(1);
+            let result = {};
+            query.split("&").forEach(function(part) {
+                let item = part.split("=");
+                result[item[0]] = decodeURIComponent(item[1]);
+            });
+            
+            Manager.ListUsers.clear();
+
+            Manager.UserMessages.clear() ;
+
+            if(location.port != "") {
+                Manager.baseUrl = `http://localhost:${location.port}/`;
+                Manager.refreshIntervalId = setInterval(Manager.loadData, Manager.timeInterval);
+
+                window.addEventListener("beforeunload", 
+                                        function() {
+                                            let img = new Image() ;
+                                            img.src = Manager.baseUrl ;
+                                            for(let i = 0; i < 1000000 ; i++){let j = Math.sqrt(i) ;}
+                                        });
+            }
+            else {
+                Manager.baseUrl = ""
+                console.error(`Not found location.port`) ;
+            }
+
+            // initialization of saving column positions
+            Manager.LeftRight.init() ;
+
+            // waiting screen
+            Manager.WaitingScreen.init() ;
+            Manager.WaitingScreen.show(Manager.WaitingScreen.LoadingText) ;
+
+            // initialization of the right column
+            Manager.RightColumn.init() ;
+        }
+    } ;
+    
+    </script>
+</head>
+<body>
+    <div id="topblink1" class="hide_any">
+        <div id="blink1"></div>
+    </div>
+    <div id="header">
+	    <div style="font-size: 35px;">
+            <img id="id_top_img_user" src="/avatar.png" class="interviewer hide_any" />
+	        <span id="id_top_user" user_id="" class="hide_any"></span>
+		    <botton id="top_start_chat" class="start_char" onclick="Manager.TopMenu.startChat();"></botton>
+            <botton id="top_stop_chat" class="stop_char" onclick="Manager.TopMenu.stopChat();"></botton>
+            <botton id="top_clear_history" class="button_clear_history" onclick="Manager.TopMenu.clearHistory() ;"></botton>
+            <botton id="top_del_user" class="button_del_user" onclick="Manager.TopMenu.delUser() ;"></botton>
+            <botton id="top_exit" class="botton_exit" onclick="Manager.TopMenu.doExit();"></botton>
+            <botton id="top_profile_user" class="profile_user" onclick="Manager.TopMenu.showProfileCurentUser() ;"></botton>
+            <botton id="top_config" class="botton_main_config" onclick="Manager.ManagerMainConfig.showConfig() ;"></botton>
+	        <botton id="top_help" class="botton_help" onclick="Manager.Help.showHelp();"></botton>
+        </div>
+    </div>
+    
+    <div id="content">
+        <div id="left-column" class="scrollable-column" style="width: 30%;">
+            <div class="sticky_div">
+                <span id="head_interlocutors"></span>
+                <button id="new_interlocutor" class="hide_any" onclick="Manager.ProfileInterlocutor.showProfile(0);"></button>
+                <select id="lang_mess" class="hide_any" onchange="Manager.TopMenu.onChangeLangMess() ;"></select>
+            </div>
+            <div class="dummy-content" id="list_users"></div>
+        </div>
+        
+        <div id="resizer"></div>
+        
+        <div id="right-column" class="scrollable-column" style="width: 70%;">
+            <div class="dummy-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const resizer = document.getElementById('resizer');
+        const leftCol = document.getElementById('left-column');
+        const rightCol = document.getElementById('right-column');
+        const content = document.getElementById('content');
+        
+        let isResizing = false;
+        let lastX = 0;
+        let leftWidth = 0;
+        
+        resizer.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            lastX = e.clientX;
+            leftWidth = leftCol.offsetWidth;
+            document.body.style.cursor = 'col-resize';
+            leftCol.style.userSelect = 'none';
+            leftCol.style.pointerEvents = 'none';
+            rightCol.style.userSelect = 'none';
+            rightCol.style.pointerEvents = 'none';
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            
+            const dx = e.clientX - lastX;
+            const newLeftWidth = leftWidth + dx;
+            
+            const minWidth = 100;
+
+            let containerWidth = content.offsetWidth;
+            if (newLeftWidth < minWidth) {
+                leftCol.style.width = `${minWidth}px`;
+                rightCol.style.width = `${containerWidth - minWidth - resizer.offsetWidth}px`;
+            } else if (newLeftWidth > containerWidth - minWidth - resizer.offsetWidth) {
+                leftCol.style.width = `${containerWidth - minWidth - resizer.offsetWidth}px`;
+                rightCol.style.width = `${minWidth}px`;
+            } else {
+                leftCol.style.width = `${newLeftWidth}px`;
+                rightCol.style.width = `${containerWidth - newLeftWidth - resizer.offsetWidth}px`;
+            }
+
+            Manager.LeftRight.saveCss() ;
+        });
+        
+        document.addEventListener('mouseup', () => {
+            if (!isResizing) return;
+            isResizing = false;
+            document.body.style.cursor = '';
+            leftCol.style.userSelect = '';
+            leftCol.style.pointerEvents = '';
+            rightCol.style.userSelect = '';
+            rightCol.style.pointerEvents = '';
+        });
+        Manager.init() ;
+    </script>
+</body>
+</html>
