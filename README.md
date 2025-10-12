@@ -296,7 +296,8 @@ Figure 13. Help Section.
 
 Clicking the "Exit" button terminates the program. See Figure 14.
 
-<img width="1788" height="899" alt="14" src="https://github.com/user-attachments/assets/8fcaa1f1-ea1f-46dd-93de-036e6908bf63" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3cd5f107-dcba-43b4-b41c-b7cefbf1d8ed" />
+
 
 
 Figure 14. Exit button.
