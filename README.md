@@ -447,7 +447,8 @@ Figure 21. Open Sound Settings.
 
 A screen with the current sound settings will appear.
 
-<img width="1920" height="1080" alt="22" src="https://github.com/user-attachments/assets/5ddfb2fc-c471-4f0f-a7c2-19c7a94aa5ce" />
+<img width="1920" height="1080" alt="22" src="https://github.com/user-attachments/assets/7bddc884-4dfe-473b-b275-5ee4d9bebf1f" />
+
 
 
 Figure 22. Current sound settings
