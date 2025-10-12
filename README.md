@@ -84,7 +84,8 @@ VBCABLE_Setup_x64.exe
 
 Hover over the speaker image in the lower-right corner of the screen and right-click, then select the menu item "Open Sound Settings" as shown in Figure 1.
 
-<img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/5dc3368e-f3cf-41c4-82aa-dde053f2312b" />
+<img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/0e50afe9-ca26-4473-b80f-eb3bebc2ea3a" />
+
 
 
 Figure 1. Open the sound settings
@@ -93,7 +94,8 @@ Figure 1. Open the sound settings
 A screen with the current sound settings will appear. Remember what is set for the input and output audio devices. You will need this information after completing the work. In Figure 2, the red arrows show what needs to be remembered. In your case, the names will be different.
 
 
-<img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/ba345f7b-9867-48df-8fd8-aa1950eaf12b" />
+<img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/02abc7f0-9497-46be-828b-e73e03e3be80" />
+
 
 
 Figure 2. Initial sound settings
@@ -105,7 +107,8 @@ For the audio input device, set the value to "CABLE-B Input (VB-Audio Cable B)"
 In Figure 3, the red arrows show what needs to be installed and where.
 
 
-<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/8ba8c880-9d6b-4f46-8ace-5e9cdab599e0" />
+<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/5e1ddb8e-84f4-4810-a064-e8adba80901c" />
+
 
 
 Figure 3. Working sound settings
@@ -114,14 +117,16 @@ Figure 3. Working sound settings
 
 Hover over the speaker image in the lower-right corner of the screen and right-click, then select the menu item "Open Sound Settings" as shown in Figure 4.
 
-<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/c668fedc-9e42-4c5a-aae1-46cd5477924a" />
+<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/9ad218cc-60fc-4627-ba4b-2b3512b32a48" />
+
 
 
 Figure 4. Open the sound settings
 
 A screen with the current sound settings will appear. Remember what is set for the input and output audio devices. You will need this information after completing the work. In Figure 5, the red arrows show what needs to be remembered. In your case, the names will be different.
 
-<img width="1920" height="1080" alt="5" src="https://github.com/user-attachments/assets/4b58ac24-e255-4d57-96b2-9b2c031ea25f" />
+<img width="1920" height="1080" alt="5" src="https://github.com/user-attachments/assets/a0ab5576-73df-4cba-862d-f59b86e6aca9" />
+
 
 
 Figure 5. Initial sound settings
@@ -132,7 +137,8 @@ For the audio input device, set the value to "CABLE-B Input (VB-Audio Cable B)"
 
 In Figure 6, the red arrows show what needs to be installed and where.
 
-<img width="1920" height="1080" alt="6" src="https://github.com/user-attachments/assets/f4621169-285d-4c46-817f-d8d3b429813d" />
+<img width="1920" height="1080" alt="6" src="https://github.com/user-attachments/assets/43e63d36-be92-429a-ab5c-73da6a384556" />
+
 
 
 Figure 6. Working sound settings.
@@ -172,7 +178,8 @@ Allow this action to be performed.
 
 During the installation process, an icon will be created on your desktop to launch audio chats, as shown in Figure 7.
 
-<img width="1920" height="1080" alt="7" src="https://github.com/user-attachments/assets/09eb21d8-7844-4e46-9da4-5e5bf638e9fd" />
+
+<img width="1920" height="1080" alt="7" src="https://github.com/user-attachments/assets/204f79e6-a4ef-40d6-9bbe-a877ce1b6b1d" />
 
 
 Figure 7. The icon for launching audio chats.
@@ -205,7 +212,8 @@ The entire interface of working with the program is carried out from the browser
 
 Hover the mouse cursor over the speaker image in the lower right corner of the screen and right-click, then select the "Open sound settings" menu item, as shown in Figure 8.
 
-<img width="1920" height="1080" alt="8" src="https://github.com/user-attachments/assets/95c73b32-0a69-42dc-a4c1-5e5738e5e9bd" />
+
+<img width="1920" height="1080" alt="8" src="https://github.com/user-attachments/assets/bf84d817-5caa-43e3-8058-38c03078a290" />
 
 
 Figure 8. Open sound settings.
@@ -213,7 +221,8 @@ Figure 8. Open sound settings.
 
 A screen with the current sound settings will appear. Remember what is set for input and output audio devices. You will need this information after you finish working. In Figure 9, the red arrows show what you need to remember. In your case, the names will be different.
 
-<img width="1920" height="1080" alt="9" src="https://github.com/user-attachments/assets/58a15a26-e032-49cb-aade-37527f851bf9" />
+<img width="1920" height="1080" alt="9" src="https://github.com/user-attachments/assets/f5f42578-7e76-4d00-b562-9aed9598b7a2" />
+
 
 
 Figure 9. Initial sound settings
@@ -224,7 +233,8 @@ Set the sound input device to "CABLE-B Input (VB-Audio Cable B)"
 
 In Figure 10, the red arrows show what and where you need to set.
 
-<img width="1920" height="1080" alt="10" src="https://github.com/user-attachments/assets/68436582-a521-437e-9b1c-a2483b228589" />
+<img width="1920" height="1080" alt="10" src="https://github.com/user-attachments/assets/cd8f5050-3961-4e23-9237-02ba594344df" />
+
 
 
 Figure 10. Working sound settings
@@ -235,7 +245,8 @@ System settings are complete, you can run the program
 
 When you click the "Configuration" button, a form with the main operating parameters is displayed in the top menu. See Figure 11.
 
-<img width="1788" height="899" alt="11" src="https://github.com/user-attachments/assets/ff10023b-cd9d-42ac-985c-7f467eead95a" />
+
+<img width="1788" height="899" alt="11" src="https://github.com/user-attachments/assets/bb314dfa-c895-4af8-a2e0-c9da48a04adb" />
 
 
 Figure 11. Configuration.
@@ -253,7 +264,7 @@ When you change the language and save the configuration settings, all text, expr
 
 Clicking the New button displays a form for filling out a new interlocutor. See Figure 12.
 
-<img width="800" height="402" alt="12" src="https://github.com/user-attachments/assets/bb474b39-98c1-433b-b464-a6d608998ccf" />
+<img width="800" height="402" alt="12" src="https://github.com/user-attachments/assets/ba62f08c-e1fb-40b3-a56c-e0a37fcea671" />
 
 
 
@@ -275,7 +286,8 @@ The "Use microphone" parameter can be left unset for cases when you are only lis
 
 The "Help" section describes how to work with the program in your language. See Figure 13.
 
-<img width="1788" height="899" alt="13" src="https://github.com/user-attachments/assets/82f073e7-5271-4263-a1a6-844c874b2b8f" />
+
+<img width="1788" height="899" alt="13" src="https://github.com/user-attachments/assets/84e92eb0-e1a3-46c4-baef-d6181ee2ce6a" />
 
 
 Figure 13. Help Section.
@@ -284,7 +296,7 @@ Figure 13. Help Section.
 
 Clicking the "Exit" button terminates the program. See Figure 14.
 
-<img width="1788" height="899" alt="14" src="https://github.com/user-attachments/assets/5e6dd926-2220-4fd8-9638-3270dd9fc08d" />
+<img width="1788" height="899" alt="14" src="https://github.com/user-attachments/assets/8fcaa1f1-ea1f-46dd-93de-036e6908bf63" />
 
 
 Figure 14. Exit button.
@@ -297,7 +309,7 @@ Refreshing the page also ends the program.
 
 On the left side of the browser is a list of your interlocutors. See Figure 15.
 
-<img width="1788" height="899" alt="15" src="https://github.com/user-attachments/assets/9bb500ef-bf60-4722-aae1-aa76d69e5a38" />
+<img width="1788" height="899" alt="15" src="https://github.com/user-attachments/assets/40b4173d-73ed-4743-a413-d2f382c1299b" />
 
 
 Figure 15. List of interlocutors.
@@ -308,7 +320,7 @@ For each interlocutor, their icon, date of the last message, and text of the las
 
 The chat history of the interlocutor is located on the right side of the browser. See Figure 16.
 
-<img width="1788" height="899" alt="16" src="https://github.com/user-attachments/assets/f8d8f564-d30f-4fee-9354-b1ac0246b754" />
+<img width="1788" height="899" alt="16" src="https://github.com/user-attachments/assets/dc80b9d9-016c-4ff0-8407-02327278fe7a" />
 
 
 Figure 16. Interlocutor's chat history.
@@ -384,7 +396,7 @@ The default message display mode is "All languages".
 
 When clicking on the "Clear history" button, all chats with the interlocutor are deleted, but the interlocutor remains. See Figure 17.
 
-<img width="1788" height="899" alt="17" src="https://github.com/user-attachments/assets/3defed3b-81aa-4579-b13f-f9250d286385" />
+<img width="1788" height="899" alt="17" src="https://github.com/user-attachments/assets/1d57ec86-a36f-4d7e-bb7c-e03204ca3bc2" />
 
 
 Figure 17. Clearing the history of the interlocutor.
@@ -395,7 +407,7 @@ If a chat with the interlocutor is currently in progress, it is stopped.
 
 Clicking the "Delete interlocutor" button deletes all chats with the interlocutor and the interlocutor himself. See Figure 18.
 
-<img width="1788" height="899" alt="18" src="https://github.com/user-attachments/assets/e1344491-70e8-45b3-a16a-b6e2a5823ac2" />
+<img width="1788" height="899" alt="18" src="https://github.com/user-attachments/assets/201ad0b7-d106-4874-9850-f76e06bc2019" />
 
 
 Figure 18. Deleting the interlocutor.
@@ -406,7 +418,7 @@ If a chat with the interlocutor is currently in progress, it is stopped.
 
 Clicking the "Interlocutor's profile" button displays a form filled with the interlocutor's data. See Figure 19.
 
-<img width="1788" height="899" alt="19" src="https://github.com/user-attachments/assets/d7988a0b-c109-4fce-86d0-d7b6594943e8" />
+<img width="1788" height="899" alt="19" src="https://github.com/user-attachments/assets/4dc950ad-b806-4117-8709-d018ecbd9a9b" />
 
 
 Figure 19. Viewing the interlocutor's profile.
@@ -417,7 +429,7 @@ This item is similar to the item **Profile of a new interlocutor**.
 
 The vertical separator allows you to change the width of the left and right areas of the workspace. See Figure 20.
 
-<img width="1788" height="899" alt="20" src="https://github.com/user-attachments/assets/50fabc78-27ed-46d0-a702-4a904e4ad1d6" />
+<img width="1788" height="899" alt="20" src="https://github.com/user-attachments/assets/2371499c-0ef5-4300-9f84-c5033346e8eb" />
 
 
 Figure 20. The vertical separator of the left and right parts.
@@ -428,7 +440,7 @@ When you move the vertical separator, its position is saved. When you restart th
 
 Move the mouse cursor over the speaker image in the lower right corner of the screen and right-click, then select the "Open Sound Settings" menu item, as shown in Figure 21.
 
-<img width="1920" height="1080" alt="21" src="https://github.com/user-attachments/assets/d2f38c96-9452-4d6a-bd2c-a7cb8c7f4eed" />
+<img width="1920" height="1080" alt="21" src="https://github.com/user-attachments/assets/112ee511-2f82-4868-97ee-d2798cb6df7b" />
 
 
 Figure 21. Open Sound Settings.
@@ -442,7 +454,7 @@ Figure 22. Current sound settings
 
 Restore the initial values ​​that were before starting the task. In your case, the names will be different.
 
-<img width="1920" height="1080" alt="23" src="https://github.com/user-attachments/assets/c504d0e2-36d5-4553-bc96-f9d7cd359975" />
+<img width="1920" height="1080" alt="23" src="https://github.com/user-attachments/assets/dcaa87fd-1590-4646-a0bd-e0b76ef67541" />
 
 
 Figure 23. Initial sound settings.
