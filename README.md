@@ -35,30 +35,7 @@ English, Estonian, Finnish, French, German, Greek, Hausa, Hebrew, Hindi, Hungari
 
 <h3>If you don't want to clone the repository, download and extract the full application with neural networks.</h3>
 
-Don't use **Download ZIP**, as the entire project isn't downloaded. Download the full project archive, including neural networks, from the repository [artaudiochats_nn](https://github.com/ArthurPronota/artaudiochats_nn). Download the files one at a time, as they are 1.9 GB in size.
-
-List of files to download:
-  * [artaudiochats.part01.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/artaudiochats.part01.rar)
-  * [artaudiochats.part02.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/artaudiochats.part02.rar)
-  * [artaudiochats.part03.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/artaudiochats.part03.rar)
-  * [artaudiochats.part04.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/artaudiochats.part04.rar)
-  * [artaudiochats.part05.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/artaudiochats.part05.rar)
-  * [artaudiochats.part06.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/artaudiochats.part06.rar)
-  * [artaudiochats.part07.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/artaudiochats.part07.rar)
-
-
-<h3>If you cloned the repository, download and extract all the necessary neural networks.</h3>
-
-1. Go to the repository [artaudiochats_nn](https://github.com/ArthurPronota/artaudiochats_nn) and download the RAR files below to your local drive. Download the files one at a time, as they are 1.9 GB in size. This archive contains all the necessary neural networks.
-    * [facebook.part01.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/facebook.part01.rar)
-    * [facebook.part02.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/facebook.part02.rar)
-    * [facebook.part03.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/facebook.part03.rar)
-    * [facebook.part04.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/facebook.part04.rar)
-    * [facebook.part05.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/facebook.part05.rar)
-    * [facebook.part06.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/facebook.part06.rar)
-    * [facebook.part07.rar](https://github.com/ArthurPronota/artaudiochats_nn/blob/main/facebook.part07.rar)
-
-2. Unzip the RAR archive into the project's root directory. This will result in **facebook** directory with nested subdirectories in the project's root directory.
+Don't use **Download ZIP**, as the entire project isn't downloaded. Download the full project archive, including neural networks, from the repository [artaudiochats_nn](https://github.com/ArthurPronota/artaudiochats_nn). Download the files one at a time.
 
 <h3>Installation of virtual audio cables.</h3>
 
